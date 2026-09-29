@@ -1,21 +1,10 @@
-.member-card {
-  border: 1px solid #d7dde3;
-  border-radius: 6px;
-  background-color: #ffffff;
-  padding: 1rem;
-  height: 100%;
-}
-
-.member-card__name {
-  margin: 0 0 0.25rem;
-}
-
-.member-card__role {
-  margin: 0 0 0.5rem;
-  font-size: 0.85rem;
-  color: #52606d;
-}
-
-.member-card__description {
-  margin: 0 0 0.75rem;
-}
+.member-card { border: 1px solid var(--border); border-radius: var(--radius); background: white; padding: 24px; height: 100%; transition: transform .2s, box-shadow .2s; }
+.member-card:hover { transform: translateY(-3px); box-shadow: 0 12px 30px #2920440a; }
+.member-card__avatar { display: grid; place-items: center; width: 54px; height: 54px; border-radius: 18px; background: #eee9fa; color: #7355b4; font: 700 17px ui-monospace, monospace; margin-bottom: 22px; }
+.member-list > li:nth-child(2n) .member-card__avatar { background: #e8efda; color: #637c3e; }
+.member-list > li:nth-child(3n) .member-card__avatar { background: #f8e7dc; color: #a86442; }
+.member-card__name { font-size: 1.05rem; margin: 0 0 6px; }
+.member-card__role { font-size: .72rem; color: var(--accent); margin: 0 0 14px; }
+.member-card__description { font-size: .82rem; color: var(--muted); margin: 0 0 22px; }
+.member-card__link { display: flex; justify-content: space-between; padding-top: 14px; border-top: 1px solid var(--border); text-decoration: none; font-size: .8rem; font-weight: 600; }
+.member-card__link::after { content: '↗'; }

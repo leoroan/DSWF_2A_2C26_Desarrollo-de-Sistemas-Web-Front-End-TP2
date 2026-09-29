@@ -1,50 +1,13 @@
-/* Estilos mínimos y funcionales. La identidad visual se aplica en una etapa posterior. */
-
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
-  line-height: 1.5;
-  color: #1f2933;
-  background-color: #f4f6f8;
-}
-
-a {
-  color: #14507d;
-}
-
-h1,
-h2,
-h3 {
-  line-height: 1.25;
-}
-
-button {
-  font: inherit;
-  cursor: pointer;
-}
-
-input,
-select {
-  font: inherit;
-  padding: 0.5rem;
-  border: 1px solid #b6c0c9;
-  border-radius: 4px;
-  background-color: #fff;
-  color: inherit;
-}
-
-.skip-link {
-  position: absolute;
-  left: -9999px;
-}
-
-.skip-link:focus {
-  position: static;
-  display: inline-block;
-  padding: 0.5rem;
-  background-color: #fff;
-}
+:root { font-family: 'Segoe UI', system-ui, sans-serif; color: #252638; background: #f6f6fa; font-synthesis: none; --accent: #6545cf; --accent-soft: #eeebfc; --muted: #68697c; --border: #e4e4ef; --surface: #fff; --radius: 18px; }
+* { box-sizing: border-box; }
+body { margin: 0; line-height: 1.65; }
+a { color: var(--accent); text-underline-offset: 4px; }
+h1, h2, h3 { line-height: 1.2; letter-spacing: -.035em; }
+button, input, select { font: inherit; }
+button, summary { cursor: pointer; }
+input, select { padding: .75rem 1rem; border: 1px solid var(--border); border-radius: 10px; background: white; color: inherit; max-width: 100%; }
+:focus-visible { outline: 3px solid #a58bed; outline-offset: 4px; }
+::selection { background: #dcd3ff; color: #292044; }
+.skip-link { position: fixed; top: 12px; left: 12px; transform: translateY(-160%); z-index: 100; padding: .7rem 1rem; background: white; border-radius: 10px; }
+.skip-link:focus { transform: none; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }

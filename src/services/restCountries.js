@@ -1,45 +1,8 @@
-/**
- * Servicio de la API de países REST Countries (versión v5).
- * Documentación: https://restcountries.com/
- *
- * Sobre la autenticación:
- * - La v5 exige una API key. Sin clave, el servidor responde 401.
- * - La clave se lee de la variable de entorno VITE_REST_COUNTRIES_API_KEY.
- * - Si no está definida, se usa la demo key oficial `rc_live_demo`.
- *
- * Sobre CORS (importante para que funcione en el navegador):
- * - La API bloquea por default las peticiones que llegan desde un navegador.
- * - Solo funcionan si el HOSTNAME de la página está en la lista "allowed origins"
- *   de la API key, que se configura en https://restcountries.com/api-keys.
- * - En ese campo se escriben solo hostnames, SIN protocolo, puerto ni ruta:
- *   `localhost`, `127.0.0.1`, `tu-proyecto.vercel.app`. Varios van separados por
- *   comas. El subdominio cuenta: `www.ejemplo.com` es distinto de `ejemplo.com`.
- * - Si falta el hostname, la API responde 403 con el código `originNotAllowed`.
- * - Ojo: las peticiones sin header `Origin` (curl, Node) no pasan por CORS, así
- *   que la API puede funcionar en la terminal y fallar en el navegador.
- *
- * Sobre seguridad: las variables `VITE_*` de Vite se incrustan en el bundle
- * del navegador, así que esta clave NO es un secreto real: es pública para
- * quien use la app. La clave real se define en un archivo `.env` local, que
- * está en `.gitignore`; al repositorio solo se sube `.env.example`.
- *
- * Este módulo solo construye la URL, ejecuta el fetch, verifica la respuesta
- * y devuelve únicamente los datos que la interfaz necesita.
- */
+// El navegador consulta nuestro servidor sin recibir la clave privada.
+const API_URL = '/api/countries'
 
-const API_URL = 'https://api.restcountries.com/countries/v5'
-
-/** Clave de la configuración de Vite, con la demo key como valor por defecto. */
-const API_KEY = import.meta.env.VITE_REST_COUNTRIES_API_KEY || 'rc_live_demo'
-
-/** Indica si se está usando la demo key en lugar de la clave del equipo. */
-export const isUsingDemoKey = !import.meta.env.VITE_REST_COUNTRIES_API_KEY
-
-/**
- * Países ofrecidos en el selector sencillo de la página.
- * Se usan los nombres en inglés porque son los que la API reconoce.
- */
 export const AVAILABLE_COUNTRIES = [
+  { id: 'Canada', label: 'Canadá' },
   { id: 'Argentina', label: 'Argentina' },
   { id: 'Brazil', label: 'Brasil' },
   { id: 'Chile', label: 'Chile' },
@@ -60,26 +23,16 @@ export const DEFAULT_COUNTRY = 'Argentina'
  * se toma el primer país cuyo nombre coincide exactamente con el buscado.
  *
  * @param {string} [country]
- * @returns {Promise<{name: string, code: string, capital: string, region: string, population: number, flag: string, isDemo: boolean}>}
+ * @returns {Promise<{name: string, code: string, capital: string, region: string, population: number, flag: string, subregion: string, area: number|null, timezones: string[], languages: string[], currencies: string[]}>}
  * @throws {Error} si la respuesta HTTP no es exitosa o no contiene el país.
  */
 export async function getCountry(country = DEFAULT_COUNTRY) {
   const url = `${API_URL}?q=${encodeURIComponent(country)}`
 
-  const response = await fetch(url, {
-    headers: { Authorization: `Bearer ${API_KEY}` },
-  })
+  const response = await fetch(url)
 
   if (!response.ok) {
-    // 403 en esta API significa que el origen (dominio) no está habilitado
-    // para esta clave. Se marca el error para que la interfaz lo explique.
-    const error = new Error(`HTTP ${response.status} - ${response.statusText}`)
-
-    if (response.status === 403) {
-      error.code = 'originNotAllowed'
-    }
-
-    throw error
+    throw new Error(`HTTP ${response.status}`)
   }
 
   const payload = await response.json()
@@ -93,8 +46,6 @@ export async function getCountry(country = DEFAULT_COUNTRY) {
   const countryData =
     objects.find((item) => item.names?.common?.toLowerCase() === wanted) ?? objects[0]
 
-  // Con la demo key la API responde con un objeto de ejemplo y este aviso.
-  const isDemo = Boolean(payload?.data?._demo)
 
   return {
     name: countryData.names?.common ?? 'Sin nombre',
@@ -103,8 +54,21 @@ export async function getCountry(country = DEFAULT_COUNTRY) {
     region: countryData.region ?? 'PENDIENTE',
     population: countryData.population ?? null,
     flag: countryData.flag?.url_png ?? '',
-    isDemo,
+    subregion: countryData.subregion || 'No disponible',
+    area: Number.isFinite(countryData.area?.kilometers) ? countryData.area.kilometers : null,
+    timezones: readList(countryData.timezones, (zone) => zone),
+    languages: readList(countryData.languages, (language) => language?.name),
+    currencies: readList(countryData.currencies, (currency) => {
+      const name = [currency?.name, currency?.code].filter(Boolean).join(' · ')
+      return name ? `${name}${currency?.symbol ? ` (${currency.symbol})` : ''}` : ''
+    }),
   }
+}
+
+/** Normaliza las listas de v5 y descarta entradas vacías. */
+function readList(value, label) {
+  if (!Array.isArray(value)) return []
+  return [...new Set(value.map(label).filter((item) => typeof item === 'string' && item.trim()))]
 }
 
 /**
@@ -123,3 +87,5 @@ function readCapital(country) {
 
   return first?.name ?? 'Sin capital'
 }
+
+

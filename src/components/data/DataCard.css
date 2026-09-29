@@ -27,3 +27,10 @@
   margin: 0.5rem 0 0;
   font-size: 0.9rem;
 }
+
+/* Superficie compartida con las tarjetas del equipo. */
+.data-card { border-color: var(--border); border-radius: var(--radius); padding: 22px; }
+.data-card summary { gap: 8px; }
+.data-card__category { color: var(--accent); font-size: .72rem; }
+.data-card__description, .data-card__details { color: var(--muted); }
+.data-card[open] { border-color: #bcabea; }

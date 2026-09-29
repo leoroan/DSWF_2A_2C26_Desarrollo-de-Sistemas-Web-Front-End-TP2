@@ -41,3 +41,8 @@
 .api-card__data dd {
   margin: 0;
 }
+
+.api-card { border-color: var(--border); border-radius: var(--radius); padding: 24px; }
+.api-card__highlight { color: var(--accent); font-size: 2.3rem; }
+.api-card__data { grid-template-columns: minmax(0, auto) minmax(0, 1fr); }
+.api-card__data dd { overflow-wrap: anywhere; }

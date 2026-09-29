@@ -34,6 +34,11 @@ const COUNTRY_RESPONSE = {
         codes: { alpha_2: 'AR', alpha_3: 'ARG' },
         capitals: [{ name: 'Buenos Aires' }],
         region: 'Americas',
+        subregion: 'South America',
+        area: { kilometers: 2780400, miles: 1073518 },
+        timezones: ['UTC-03:00'],
+        languages: [{ name: 'Spanish', bcp47: 'es' }],
+        currencies: [{ code: 'ARS', name: 'Argentine peso', symbol: '$' }],
         population: 45808747,
         flag: { url_png: 'https://flags.restcountries.com/v5/w640/ar.png' },
       },
@@ -43,7 +48,7 @@ const COUNTRY_RESPONSE = {
 }
 
 // Permite simular el fallo de una sola API sin romper la otra.
-const failing = { weather: false, country: false, countryOrigin: false }
+const failing = { weather: false, country: false }
 
 global.fetch = async (url, options) => {
   const isWeather = String(url).includes('open-meteo')
@@ -53,18 +58,9 @@ global.fetch = async (url, options) => {
     return { ok: false, status: 503, statusText: 'Service Unavailable' }
   }
 
-  // Reproduce el 403 que devuelve REST Countries cuando el dominio no está
-  // habilitado en la lista CORS de la API key.
-  if (!isWeather && failing.countryOrigin) {
-    const error = new Error('HTTP 403 - Forbidden')
-    error.code = 'originNotAllowed'
-    throw error
-  }
-
   if (!isWeather) {
-    const auth = options?.headers?.Authorization
-    if (typeof auth !== 'string' || !auth.startsWith('Bearer ')) {
-      throw new Error('El servicio no envía la cabecera Authorization: Bearer.')
+    if (!String(url).startsWith('/api/countries?') || options?.headers?.Authorization) {
+      throw new Error('El navegador debe consultar el proxy sin credenciales.')
     }
   }
 
@@ -141,6 +137,7 @@ check('Open-Meteo muestra la descripción del código', api.container.innerHTML.
 check('REST Countries renderiza el país', api.container.innerHTML.includes('Argentina (AR)'))
 check('REST Countries muestra capital, región y población', api.container.innerHTML.includes('45.808.747'))
 check('REST Countries muestra la bandera', api.container.innerHTML.includes('w640/ar.png'))
+check('REST Countries muestra los cinco campos nuevos', ['South America', '2.780.400 km²', 'UTC-03:00', 'Spanish', 'Argentine peso · ARS ($)'].every((value) => api.container.textContent.includes(value)))
 api.unmount()
 
 // Error en una sola API: la otra debe seguir funcionando.
@@ -164,17 +161,7 @@ await waitFor(() => screen.getByText('Argentina (AR)'))
 check('Reintento vuelve a consultar REST Countries', apiRetry.container.innerHTML.includes('45.808.747'))
 apiRetry.unmount()
 
-// Error 403: dominio no habilitado en la API key.
-failing.countryOrigin = true
-const apiOrigin = renderApp('/api')
-await waitFor(() => screen.getByText(/Valor a agregar/))
-check('REST Countries explica el 403 de origen', apiOrigin.container.innerHTML.includes('allowed origins'))
-check('El 403 no rompe Open-Meteo', apiOrigin.container.innerHTML.includes('16.6'))
-apiOrigin.unmount()
 
-failing.weather = false
-failing.country = false
-failing.countryOrigin = false
 
 // --- Árbol, bitácora, IA y 404 -------------------------------------------
 const tree = renderApp('/arbol')
@@ -215,4 +202,5 @@ process.exit(failures === 0 ? 0 : 1)
 check('Detalle expandible por registro', data.container.querySelector('.data-card summary') !== null)
 check('El detalle muestra description/details', data.container.querySelector('.data-card__details') !== null)
 data.unmount()
+
 

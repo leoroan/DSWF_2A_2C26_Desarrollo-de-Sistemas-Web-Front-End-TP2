@@ -103,62 +103,20 @@ Sitio: https://restcountries.com/
 
 Servicio: `src/services/restCountries.js`.
 
-**Configuración de la clave.** La versión actual (v5) exige API key y se sirve desde
-`api.restcountries.com/countries/v5`. La clave se configura con la variable de entorno:
+**Configuración de la clave.** Copiar `.env.example` a `.env.local` y completar
+`REST_COUNTRIES_API_KEY`. Este archivo está excluido de Git. Reiniciar Vite después
+de cambiarlo. No usar el prefijo `VITE_`: la clave debe permanecer en el servidor.
 
-```bash
-VITE_REST_COUNTRIES_API_KEY=tu_clave_aqui
-```
+React consulta `/api/countries?q=Canada`. La función `api/countries.js` agrega
+`Authorization: Bearer ...` y consulta REST Countries v5. La misma función se usa
+en desarrollo, en la previsualización local y en Vercel. Solo admite los países
+del selector, limita la espera a diez segundos y devuelve errores sin credenciales.
 
-Pasos:
+En Vercel, agregar `REST_COUNTRIES_API_KEY` en Settings → Environment Variables
+para los entornos deseados y volver a desplegar. Sin esa variable, la interfaz
+mostrará el estado de error con la opción de reintentar.
 
-1. Crear una cuenta y obtener la clave en https://restcountries.com/.
-2. Copiar `.env.example` como `.env` en la raíz del proyecto.
-3. Reemplazar el valor de `VITE_REST_COUNTRIES_API_KEY` por la clave del equipo.
-
-**Orígenes CORS (importante).** Por default la API bloquea las peticiones que llegan
-desde un navegador. Solo funcionan si el **hostname** de la página está en la lista de
-*allowed origins* de la API key, que se configura en https://restcountries.com/api-keys.
-
-En ese campo hay que escribir **solo hostnames, sin protocolo, puerto ni ruta**:
-
-| Uso | Valor a escribir |
-| --- | --- |
-| Desarrollo (`npm run dev`) | `localhost` |
-| Build local (`npm run preview`) | `localhost` |
-| Producción | `tu-proyecto.vercel.app` (el dominio, sin `https://`) |
-
-Como es una lista separada por comas, se puede pegar todo junto:
-
-```text
-localhost,127.0.0.1,tu-proyecto.vercel.app
-```
-
-Detalles que hacen fallar la configuración:
-
-- No incluir el protocolo: hay que escribir `localhost`, no `http://localhost`.
-- No incluir el puerto: `localhost` ya cubre el 5173 y el 4173.
-- No incluir la ruta: `tu-proyecto.vercel.app`, no `/datos`.
-- El subdominio es parte del nombre: `www.ejemplo.com` es distinto de `ejemplo.com`.
-- Las IP también se soportan, por ejemplo `127.0.0.1`.
-
-Si falta el hostname, la API responde `403` con el código `originNotAllowed`, la
-tarjeta del país no carga y la interfaz muestra el hostname exacto que hay que agregar.
-
-> Las peticiones **sin** header `Origin` (por ejemplo, desde un script de Node o
-> `curl`) no están afectadas por CORS. Por eso la API puede seeming funcionar en la
-> terminal y fallar en el navegador.
-
-La clave **no se sube al repositorio**: `.env` está en `.gitignore` y solo se versiona
-`.env.example`. Además, como las variables `VITE_*` de Vite se incrustan en el bundle
-del navegador, esta clave es de uso público del frontend y **no es un secreto real**;
-nunca debe usarse una clave privada.
-
-Si la variable no está definida, la aplicación usa la demo key oficial `rc_live_demo`
-para poder probar la integración. La demo key devuelve siempre un país de ejemplo
-(Canadá), solo funciona desde los orígenes de REST Countries y la interfaz lo avisa
-de forma explícita.
-
+Referencia: [funciones Node.js de Vercel](https://vercel.com/docs/functions/runtimes/node-js).
 ## Deploy
 
 - URL de producción: `URL_PENDIENTE`
@@ -216,4 +174,5 @@ Pendiente de agregar.
 - [ ] Publicar el repositorio y verificar acceso sin autenticación (criterio 1).
 - [ ] Invitar a todos los integrantes y verificar que aceptaron la invitación (criterio 3).
 - [ ] Aplicar la identidad visual definitiva (criterio 9, fuera del alcance de esta base).
+
 

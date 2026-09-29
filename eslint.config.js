@@ -37,9 +37,10 @@ export default [
   },
   {
     // El smoke test corre en Node, no en el navegador.
-    files: ['scripts/**/*.js'],
+    files: ['scripts/**/*.js', 'api/**/*.js', 'vite.config.js'],
     languageOptions: {
       globals: globals.node,
     },
   },
 ]
+

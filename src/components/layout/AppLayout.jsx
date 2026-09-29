@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import Sidebar from './Sidebar'
 import './AppLayout.css'
@@ -9,6 +9,19 @@ import './AppLayout.css'
  */
 function AppLayout() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+  const toggleRef = useRef(null)
+
+  useEffect(() => {
+    if (!isSidebarOpen) return
+    const handleEscape = (event) => {
+      if (event.key === 'Escape') {
+        setIsSidebarOpen(false)
+        toggleRef.current?.focus()
+      }
+    }
+    window.addEventListener('keydown', handleEscape)
+    return () => window.removeEventListener('keydown', handleEscape)
+  }, [isSidebarOpen])
 
   const closeSidebar = () => setIsSidebarOpen(false)
 
@@ -21,6 +34,7 @@ function AppLayout() {
       <header className="app-layout__header">
         <button
           type="button"
+          ref={toggleRef}
           className="app-layout__toggle"
           aria-expanded={isSidebarOpen}
           aria-controls="app-sidebar"
@@ -32,6 +46,7 @@ function AppLayout() {
       </header>
 
       <div className="app-layout__body">
+        {isSidebarOpen && <button className="app-layout__backdrop" aria-label="Cerrar menú lateral" onClick={closeSidebar} />}
         <Sidebar isOpen={isSidebarOpen} onNavigate={closeSidebar} />
 
         <main id="main-content" className="app-layout__content" tabIndex={-1}>

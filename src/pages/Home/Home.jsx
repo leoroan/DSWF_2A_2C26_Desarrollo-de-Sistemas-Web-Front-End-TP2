@@ -9,18 +9,18 @@ function Home() {
   return (
     <>
       <PageHeader
-        title="Inicio"
-        description="Portada del proyecto. Conocé al equipo y sus secciones."
+        title="Nuestro espacio de trabajo"
+        description="Personas, recursos y aprendizajes. Todo conectado en un mismo lugar."
       />
 
       <TeamIntro />
 
       <section className="page-section" aria-labelledby="home-members-title">
-        <h2 id="home-members-title">Integrantes</h2>
+        <div className="home-section-heading">
+          <div><h2 id="home-members-title">Las personas detrás de las ideas</h2><p>Distintas miradas. Un proyecto compartido.</p></div>
+          <Link to="/integrantes">Ver integrantes →</Link>
+        </div>
         <MemberList members={teamMembers} id="team-members" />
-        <p>
-          <Link to="/integrantes">Ver todos los integrantes</Link>
-        </p>
       </section>
     </>
   )
