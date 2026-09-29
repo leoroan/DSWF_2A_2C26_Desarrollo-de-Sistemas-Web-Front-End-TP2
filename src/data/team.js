@@ -7,10 +7,11 @@
  * Reemplazar los campos marcados antes de publicar.
  */
 export const team = {
-  name: 'PENDIENTE - Nombre del equipo',
-  shortName: 'Equipo PENDIENTE',
+  // Identidad editorial provisional: reemplazar por el nombre del equipo de TP1.
+  name: 'Espacio de ideas',
+  shortName: 'Espacio de ideas',
   description:
-    'PENDIENTE - Descripción breve del equipo (PENDIENTE). La aplicación React del TP2 organiza la información del equipo en secciones navegables.',
+    'Un punto de encuentro para compartir lo que aprendemos, explorar herramientas y construir experiencias para la web.',
   course: 'Desarrollo de Sistemas Web Front End - TP2',
   repositoryUrl: 'PENDIENTE',
   demoUrl: 'PENDIENTE',

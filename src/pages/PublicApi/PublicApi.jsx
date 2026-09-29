@@ -1,11 +1,10 @@
-﻿import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import PageHeader from '../../components/common/PageHeader'
 import WeatherCard from '../../components/api/WeatherCard'
 import CountryCard from '../../components/api/CountryCard'
 import { getWeather } from '../../services/openMeteo'
 import {
   getCountry,
-  isUsingDemoKey,
   AVAILABLE_COUNTRIES,
   DEFAULT_COUNTRY,
 } from '../../services/restCountries'
@@ -17,11 +16,8 @@ const STATUS = {
   LOADING: 'loading',
   SUCCESS: 'success',
   ERROR: 'error',
-  ORIGIN_NOT_ALLOWED: 'originNotAllowed',
 }
 
-/** Hostname de la página, que es el valor que la API espera en allowed origins. */
-const pageHostname = typeof window === 'undefined' ? 'localhost' : window.location.hostname
 
 /** Página de APIs públicas (ruta /api): Open-Meteo y REST Countries. */
 function PublicApi() {
@@ -53,10 +49,7 @@ function PublicApi() {
     } catch (error) {
       console.error('Error al consultar REST Countries:', error)
       setCountry(null)
-      // 403 = el dominio no está habilitado para esta API key.
-      setCountryStatus(
-        error.code === 'originNotAllowed' ? STATUS.ORIGIN_NOT_ALLOWED : STATUS.ERROR,
-      )
+      setCountryStatus(STATUS.ERROR)
     }
   }, [selectedCountry])
 
@@ -73,7 +66,7 @@ function PublicApi() {
     <>
       <PageHeader
         title="APIs públicas"
-        description="La aplicación consume dos APIs públicas reales desde el navegador. Cada una maneja su propio estado de carga y de error."
+        description="Explorá el clima y la información de países. Cada consulta tiene sus propios estados de carga y error."
         backTo="/"
         backLabel="Volver a la portada"
       />
@@ -134,27 +127,7 @@ function PublicApi() {
 
         {countryStatus === STATUS.LOADING && <p role="status">Cargando país...</p>}
 
-        {countryStatus === STATUS.ORIGIN_NOT_ALLOWED && (
-          <div className="page-empty" role="alert">
-            <p>No se pudo obtener la información del país.</p>
-            <p>
-              Esta API bloquea por defecto las peticiones desde el navegador. Hay que habilitar
-              el hostname de esta página en la lista &quot;allowed origins&quot; de la API key:
-              <br />
-              <a href="https://restcountries.com/api-keys" target="_blank" rel="noreferrer">
-                https://restcountries.com/api-keys
-              </a>
-            </p>
-            <p>
-              Valor a agregar (solo el hostname, sin protocolo, puerto ni ruta):
-              <br />
-              <code>{pageHostname}</code>
-            </p>
-            <button type="button" className="page-button" onClick={loadCountry}>
-              Reintentar
-            </button>
-          </div>
-        )}
+
 
         {countryStatus === STATUS.ERROR && (
           <div className="page-empty" role="alert">
@@ -167,12 +140,7 @@ function PublicApi() {
 
         {countryStatus === STATUS.SUCCESS && country && (
           <>
-            {country.isDemo && (
-              <p role="status">
-                Se está usando la demo key: la API devuelve un país de ejemplo. Configurá la
-                variable VITE_REST_COUNTRIES_API_KEY para ver el país seleccionado.
-              </p>
-            )}
+
             <CountryCard country={country} />
             <p>
               <button
@@ -187,15 +155,10 @@ function PublicApi() {
         )}
       </section>
 
-      {isUsingDemoKey && (
-        <p>
-          REST Countries se está consultando con la demo key oficial. Configurá
-          VITE_REST_COUNTRIES_API_KEY en tu archivo <code>.env</code> local para usar la clave
-          del equipo.
-        </p>
-      )}
+
     </>
   )
 }
 
 export default PublicApi
+

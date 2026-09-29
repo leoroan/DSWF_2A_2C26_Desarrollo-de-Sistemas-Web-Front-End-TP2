@@ -35,3 +35,9 @@
   font-size: 0.8rem;
   color: #616e7c;
 }
+
+.tree { background: white; padding: 24px; border: 1px solid var(--border); border-radius: var(--radius); }
+.tree__node summary { padding: 8px; border-radius: 8px; }
+.tree__node summary:hover { background: var(--accent-soft); }
+.tree__name { color: var(--accent); }
+.tree__file { overflow-wrap: anywhere; min-width: 0; }
