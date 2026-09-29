@@ -1,0 +1,29 @@
+.data-card {
+  height: 100%;
+  border: 1px solid #d7dde3;
+  border-radius: 6px;
+  background-color: #ffffff;
+  padding: 0.75rem;
+}
+
+.data-card summary {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.data-card__name {
+  font-weight: 600;
+}
+
+.data-card__category {
+  font-size: 0.78rem;
+  color: #616e7c;
+}
+
+.data-card__description,
+.data-card__details {
+  margin: 0.5rem 0 0;
+  font-size: 0.9rem;
+}

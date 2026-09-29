@@ -1,0 +1,41 @@
+# Dependencias
+node_modules/
+
+# Build de Vite
+dist/
+dist-ssr/
+
+# Entorno local (nunca commitear claves; .env.example sí se commitea)
+.env
+.env.*
+!.env.example
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Editor / SO
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Logs de verificacion local
+install.log
+build.log
+
+smoke.log
+inst2.log
+jsdom-install.log
+tl.log
+verif.log

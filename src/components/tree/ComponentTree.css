@@ -1,0 +1,37 @@
+.tree,
+.tree__children {
+  list-style: none;
+  margin: 0;
+  padding-left: 1rem;
+}
+
+.tree {
+  padding-left: 0;
+}
+
+.tree__children {
+  border-left: 1px solid #d7dde3;
+  margin-left: 0.4rem;
+}
+
+.tree__node {
+  margin: 0.15rem 0;
+}
+
+.tree__node summary {
+  cursor: pointer;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: baseline;
+}
+
+.tree__name {
+  font-weight: 600;
+}
+
+.tree__file {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.8rem;
+  color: #616e7c;
+}

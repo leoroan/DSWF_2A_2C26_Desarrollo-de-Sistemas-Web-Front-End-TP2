@@ -1,0 +1,194 @@
+﻿[
+  {
+    "id": 1,
+    "name": "React",
+    "category": "Librerías",
+    "description": "Biblioteca de JavaScript de código abierto para construir interfaces de usuario mediante componentes.",
+    "details": "Creada por Meta (Facebook) en 2013. El proyecto TP2 está desarrollado con React, como exige la consigna. React trabaja con un modelo de componentes y renderizado declarativo basado en el estado.",
+    "link": "https://react.dev"
+  },
+  {
+    "id": 2,
+    "name": "React DOM",
+    "category": "Librerías",
+    "description": "Paquete que permite usar React para renderizar componentes en el navegador web.",
+    "details": "Es el intermediario entre los componentes de React y el DOM real del navegador. En este proyecto se usa a través de la función createRoot definida en main.jsx.",
+    "link": "https://react.dev/reference/react-dom"
+  },
+  {
+    "id": 3,
+    "name": "JSX",
+    "category": "Librerías",
+    "description": "Extensión de sintaxis para JavaScript que permite escribir etiquetas dentro del código JavaScript.",
+    "details": "Cada etiqueta JSX se transforma en una llamada a React.createElement. No es un lenguaje separado: es JavaScript con sintaxis declarativa que el build de Vite convierte automáticamente.",
+    "link": "https://react.dev/learn/writing-markup-with-jsx"
+  },
+  {
+    "id": 4,
+    "name": "Vite",
+    "category": "Herramientas",
+    "description": "Herramienta de desarrollo y build de front end, usada como bundler y servidor de desarrollo.",
+    "details": "En desarrollo sirve los módulos de forma nativa con ES Modules y aplica Hot Module Replacement. En producción genera un build estático en la carpeta dist, que es lo que se despliega en Vercel.",
+    "link": "https://vite.dev"
+  },
+  {
+    "id": 5,
+    "name": "React Router",
+    "category": "Librerías",
+    "description": "Librería de enrutamiento para React que permite crear navegación entre páginas sin recargar el documento.",
+    "details": "En este proyecto se usa en modo declarativo con BrowserRouter, Routes, Route y Outlet. La sidebar se mantiene montada en un layout común y solo cambia el contenido del Outlet.",
+    "link": "https://reactrouter.com"
+  },
+  {
+    "id": 6,
+    "name": "Navegación del lado del cliente",
+    "category": "Conceptos",
+    "description": "Estrategia en la que las transiciones entre vistas las resuelve JavaScript sin una carga completa de la página.",
+    "details": "El router intercepta los clics sobre los enlaces internos, modifica la URL mediante la History API y vuelve a renderizar solo la parte de la página que cambió. El layout y la sidebar no se vuelven a montar.",
+    "link": "https://reactrouter.com/en/main/start/tutorial"
+  },
+  {
+    "id": 7,
+    "name": "Componente",
+    "category": "Conceptos",
+    "description": "Unidad reutilizable de interfaz: una función de JavaScript que devuelve elementos de React.",
+    "details": "Un componente recibe datos por props, declara su estado interno si lo necesita y no modifica datos externos. Permite dividir la aplicación en piezas con una responsabilidad clara.",
+    "link": "https://react.dev/learn/your-first-component"
+  },
+  {
+    "id": 8,
+    "name": "Props",
+    "category": "Conceptos",
+    "description": "Mecanismo por el cual un componente padre le pasa datos a un componente hijo.",
+    "details": "Las props son de solo lectura. En esta aplicación, por ejemplo, MemberCard recibe el integrante mediante la prop member y DataCard recibe cada registro mediante la prop record.",
+    "link": "https://react.dev/learn/passing-props-to-a-component"
+  },
+  {
+    "id": 9,
+    "name": "Estado (useState)",
+    "category": "Conceptos",
+    "description": "Hook que permite a un componente conservar información entre renders y re-renderizarse al cambiar.",
+    "details": "Se usa en cuatro lugares del proyecto: apertura de la sidebar, texto de búsqueda, categoría seleccionada y estado de la petición a la API pública (idle, loading, success, error).",
+    "link": "https://react.dev/reference/react/useState"
+  },
+  {
+    "id": 10,
+    "name": "Ciclo de renderizado",
+    "category": "Conceptos",
+    "description": "Proceso por el cual React vuelve a ejecutar los componentes para reflejar el estado actual.",
+    "details": "React compara el resultado con el DOM anterior y aplica solo los cambios necesarios. Un renderizado puede ser causado por un cambio de estado, por props nuevas o por el cambio de ruta.",
+    "link": "https://react.dev/learn/preserving-and-resetting-state"
+  },
+  {
+    "id": 11,
+    "name": "Elementos semánticos",
+    "category": "Accesibilidad",
+    "description": "Uso de etiquetas HTML con significado (header, nav, main, section, article) en lugar de div genéricos.",
+    "details": "Ayudan a lectores de pantalla, a la navegación por teclado y a los buscadores. En este proyecto el layout usa header, nav y main; las acciones usan button y la navegación usa enlaces reales.",
+    "link": "https://developer.mozilla.org/docs/Web/HTML/Element"
+  },
+  {
+    "id": 12,
+    "name": "Labels y control de formulario",
+    "category": "Accesibilidad",
+    "description": "Cada campo de entrada debe estar asociado a un label visible mediante el atributo htmlFor.",
+    "details": "La búsqueda textual y el selector de categoría de la sección /datos están implementados así, de modo que también se puedan activar desde el teclado con el tabulador.",
+    "link": "https://developer.mozilla.org/docs/Web/HTML/Element/label"
+  },
+  {
+    "id": 13,
+    "name": "HTML5 semántico",
+    "category": "Estándares",
+    "description": "Conjunto de etiquetas que define la estructura de un documento web de forma estándar.",
+    "details": "El proyecto es una Single Page Application: el documento real se genera una sola vez y luego solo cambia el contenido de #root, sin recargar el index.html.",
+    "link": "https://developer.mozilla.org/docs/Web/HTML"
+  },
+  {
+    "id": 14,
+    "name": "CSS por componente",
+    "category": "Estándares",
+    "description": "Cada componente define su propio estilo en un archivo homónimo para evitar colisiones de nombres globales.",
+    "details": "Los estilos son deliberadamente mínimos y funcionales: la identidad visual definitiva se aplica en una etapa posterior del proyecto, reemplazando estas hojas de estilo.",
+    "link": "https://developer.mozilla.org/docs/Web/CSS"
+  },
+  {
+    "id": 15,
+    "name": "CSS Grid",
+    "category": "Estándares",
+    "description": "Sistema de diseño en dos dimensiones para distribuir los elementos en filas y columnas.",
+    "details": "Se usa en el layout general, en la grilla de integrantes y en la grilla de registros, de modo que la estructura quede lista para un rediseño posterior.",
+    "link": "https://developer.mozilla.org/docs/Web/CSS/CSS_grid_layout"
+  },
+  {
+    "id": 16,
+    "name": "Media queries",
+    "category": "Estándares",
+    "description": "Reglas CSS que aplican estilos distintos según características del dispositivo, como el ancho de la pantalla.",
+    "details": "El layout conmuta a una sola columna por debajo de 900px y la sidebar se convierte en un panel desplegable con un botón de apertura y cierre.",
+    "link": "https://developer.mozilla.org/docs/Web/CSS/CSS_media_queries"
+  },
+  {
+    "id": 17,
+    "name": "fetch",
+    "category": "Conceptos",
+    "description": "API nativa del navegador para realizar peticiones HTTP de forma asíncrona.",
+    "details": "Devuelve una promesa. No se debe asumir que una respuesta es exitosa: hay que verificar response.ok y convertir el cuerpo con response.json(), propagando el error al componente.",
+    "link": "https://developer.mozilla.org/docs/Web/API/Fetch_API"
+  },
+  {
+    "id": 18,
+    "name": "Open-Meteo y REST Countries",
+    "category": "APIs públicas",
+    "description": "APIs públicas reales consultadas desde el navegador, sin backend: Open-Meteo para el clima y REST Countries para información de países.",
+    "details": "Son las dos fuentes de la sección /api. Open-Meteo no requiere clave; REST Countries usa la v5, que exige una API key configurable por variable de entorno. Cada una maneja su propio estado de carga y de error.",
+    "link": "https://restcountries.com/docs/countries"
+  },
+  {
+    "id": 19,
+    "name": "Estados de una petición",
+    "category": "Conceptos",
+    "description": "Una consulta remota se modela explícitamente con estados idle, loading, success y error.",
+    "details": "Modelar los estados evita errores silenciosos y permite ofrecer una acción de reintento reutilizando la misma función de carga, sin duplicar lógica.",
+    "link": "https://react.dev/reference/react/useEffect"
+  },
+  {
+    "id": 20,
+    "name": "Módulos ES",
+    "category": "Estándares",
+    "description": "Sistema de módulos del estándar ECMAScript que permite importar y exportar valores entre archivos.",
+    "details": "Todo el proyecto usa import y export. Los datos se importan desde src/data y la lógica de red desde src/services, manteniendo los componentes centrados en el renderizado.",
+    "link": "https://developer.mozilla.org/docs/Web/JavaScript/Guide/Modules"
+  },
+  {
+    "id": 21,
+    "name": "npm",
+    "category": "Herramientas",
+    "description": "Gestor de paquetes de Node.js y registro público de paquetes de JavaScript.",
+    "details": "El proyecto declara sus dependencias en package.json. Los comandos principales son npm install, npm run dev, npm run build y npm run lint.",
+    "link": "https://www.npmjs.com"
+  },
+  {
+    "id": 22,
+    "name": "ESLint",
+    "category": "Herramientas",
+    "description": "Analizador estático de JavaScript que detecta errores y prácticas inseguras antes de compilar.",
+    "details": "Se ejecuta con npm run lint como verificación obligatoria. El proyecto no debe quedar con errores de lint ni imports sin utilizar.",
+    "link": "https://eslint.org"
+  },
+  {
+    "id": 23,
+    "name": "Despliegue estático",
+    "category": "Herramientas",
+    "description": "Publicación del build generado en un hosting que sirve los archivos estáticos de la aplicación.",
+    "details": "El build de Vite produce la carpeta dist. Todas las rutas de la aplicación deben poder abrirse directamente, lo que requiere la reescritura de rutas hacia index.html en el hosting.",
+    "link": "https://vercel.com/docs"
+  },
+  {
+    "id": 24,
+    "name": "Git",
+    "category": "Herramientas",
+    "description": "Sistema de control de versiones distribuido usado para registrar la evolución del proyecto.",
+    "details": "La bitácora de la sección /bitacora documenta cambios relevantes del proyecto. El repositorio debe ser público para permitir la revisión del docente y de los integrantes.",
+    "link": "https://git-scm.com"
+  }
+]

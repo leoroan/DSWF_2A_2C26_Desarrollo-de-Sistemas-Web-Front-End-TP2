@@ -1,0 +1,62 @@
+.sidebar {
+  padding: 1rem;
+  background-color: #ffffff;
+  border-right: 1px solid #d7dde3;
+  min-height: calc(100vh - 53px);
+}
+
+.sidebar__team-name {
+  margin: 0;
+  font-weight: 700;
+}
+
+.sidebar__course,
+.sidebar__footer {
+  margin: 0.25rem 0 0;
+  font-size: 0.8rem;
+  color: #616e7c;
+}
+
+.sidebar__footer {
+  margin-top: 1.5rem;
+}
+
+.sidebar__list {
+  list-style: none;
+  margin: 1rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.sidebar__link {
+  display: block;
+  padding: 0.5rem 0.6rem;
+  border-radius: 4px;
+  text-decoration: none;
+  color: #1f2933;
+}
+
+.sidebar__link:hover {
+  background-color: #eef2f6;
+}
+
+.sidebar__link--active {
+  background-color: #14507d;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+@media (max-width: 900px) {
+  .sidebar {
+    display: none;
+    min-height: auto;
+    border-right: none;
+    border-bottom: 1px solid #d7dde3;
+  }
+
+  .sidebar--open {
+    display: block;
+  }
+}

@@ -1,0 +1,43 @@
+.api-card {
+  height: 100%;
+  border: 1px solid #d7dde3;
+  border-radius: 6px;
+  background-color: #ffffff;
+  padding: 1rem;
+}
+
+.api-card__name {
+  margin: 0 0 0.5rem;
+}
+
+.api-card__highlight {
+  margin: 0 0 0.5rem;
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.api-card__flag {
+  display: block;
+  width: 100%;
+  max-width: 160px;
+  height: auto;
+  border: 1px solid #d7dde3;
+  border-radius: 3px;
+}
+
+.api-card__data {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.15rem 0.75rem;
+  margin: 0.75rem 0 0;
+  font-size: 0.9rem;
+}
+
+.api-card__data dt {
+  font-weight: 600;
+  color: #52606d;
+}
+
+.api-card__data dd {
+  margin: 0;
+}

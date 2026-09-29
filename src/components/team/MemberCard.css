@@ -1,0 +1,21 @@
+.member-card {
+  border: 1px solid #d7dde3;
+  border-radius: 6px;
+  background-color: #ffffff;
+  padding: 1rem;
+  height: 100%;
+}
+
+.member-card__name {
+  margin: 0 0 0.25rem;
+}
+
+.member-card__role {
+  margin: 0 0 0.5rem;
+  font-size: 0.85rem;
+  color: #52606d;
+}
+
+.member-card__description {
+  margin: 0 0 0.75rem;
+}

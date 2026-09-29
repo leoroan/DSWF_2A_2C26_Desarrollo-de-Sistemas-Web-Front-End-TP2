@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1,
+    "date": "PENDIENTE",
+    "status": "pendiente",
+    "title": "Definición del equipo y de la propuesta",
+    "description": "PENDIENTE - Completar por el equipo: acuerdo sobre el nombre del proyecto, la temática de los datos y el reparto de responsabilidades."
+  },
+  {
+    "id": 2,
+    "date": "PENDIENTE",
+    "status": "pendiente",
+    "title": "Definición de la estructura de carpetas",
+    "description": "Se definieron las capas del proyecto: pages, components, data, services y router, siguiendo la separación de responsabilidades pedida en la consigna."
+  },
+  {
+    "id": 3,
+    "date": "PENDIENTE",
+    "status": "pendiente",
+    "title": "Implementación de la navegación y la sidebar",
+    "description": "Se creó el layout común con Sidebar y Outlet, usando React Router y NavLink para identificar la sección activa. La sidebar quedó preparada para convertirse en panel móvil."
+  },
+  {
+    "id": 4,
+    "date": "PENDIENTE",
+    "status": "pendiente",
+    "title": "Portada y perfiles de integrantes",
+    "description": "Se implementaron la portada del equipo y las rutas individuales /integrantes/:id, con componentes reutilizentes MemberCard y MemberList."
+  },
+  {
+    "id": 5,
+    "date": "PENDIENTE",
+    "status": "pendiente",
+    "title": "Datos locales, búsqueda y filtro",
+    "description": "Se cargó records.json con 24 registros y se implementaron la búsqueda textual, el filtro por categoría, el mensaje de sin resultados y el botón de limpiar filtros."
+  },
+  {
+    "id": 6,
+    "date": "PENDIENTE",
+    "status": "pendiente",
+    "title": "Integración de APIs públicas",
+    "description": "La sección /api quedó migrada a dos APIs públicas reales: Open-Meteo para el clima de Buenos Aires y REST Countries (v5) para información de países, con servicios separados y estados independientes de carga y error."
+  },
+  {
+    "id": 7,
+    "date": "PENDIENTE",
+    "status": "pendiente",
+    "title": "Árbol de componentes, bitácora y sección de IA",
+    "description": "Se agregaron las secciones /arbol, /bitacora y /ia, todas alimentadas por archivos de datosCentralizados en src/data."
+  },
+  {
+    "id": 8,
+    "date": "PENDIENTE",
+    "status": "pendiente",
+    "title": "Verificación de build y lint",
+    "description": "Se ejecutaron npm run build y npm run lint para comprobar que el proyecto compila sin errores antes de la entrega."
+  }
+]
