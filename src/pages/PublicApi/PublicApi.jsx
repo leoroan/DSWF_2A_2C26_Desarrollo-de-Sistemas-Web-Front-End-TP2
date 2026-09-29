@@ -17,7 +17,11 @@ const STATUS = {
   LOADING: 'loading',
   SUCCESS: 'success',
   ERROR: 'error',
+  ORIGIN_NOT_ALLOWED: 'originNotAllowed',
 }
+
+/** Hostname de la página, que es el valor que la API espera en allowed origins. */
+const pageHostname = typeof window === 'undefined' ? 'localhost' : window.location.hostname
 
 /** Página de APIs públicas (ruta /api): Open-Meteo y REST Countries. */
 function PublicApi() {
@@ -49,7 +53,10 @@ function PublicApi() {
     } catch (error) {
       console.error('Error al consultar REST Countries:', error)
       setCountry(null)
-      setCountryStatus(STATUS.ERROR)
+      // 403 = el dominio no está habilitado para esta API key.
+      setCountryStatus(
+        error.code === 'originNotAllowed' ? STATUS.ORIGIN_NOT_ALLOWED : STATUS.ERROR,
+      )
     }
   }, [selectedCountry])
 
@@ -126,6 +133,28 @@ function PublicApi() {
         </div>
 
         {countryStatus === STATUS.LOADING && <p role="status">Cargando país...</p>}
+
+        {countryStatus === STATUS.ORIGIN_NOT_ALLOWED && (
+          <div className="page-empty" role="alert">
+            <p>No se pudo obtener la información del país.</p>
+            <p>
+              Esta API bloquea por defecto las peticiones desde el navegador. Hay que habilitar
+              el hostname de esta página en la lista &quot;allowed origins&quot; de la API key:
+              <br />
+              <a href="https://restcountries.com/api-keys" target="_blank" rel="noreferrer">
+                https://restcountries.com/api-keys
+              </a>
+            </p>
+            <p>
+              Valor a agregar (solo el hostname, sin protocolo, puerto ni ruta):
+              <br />
+              <code>{pageHostname}</code>
+            </p>
+            <button type="button" className="page-button" onClick={loadCountry}>
+              Reintentar
+            </button>
+          </div>
+        )}
 
         {countryStatus === STATUS.ERROR && (
           <div className="page-empty" role="alert">

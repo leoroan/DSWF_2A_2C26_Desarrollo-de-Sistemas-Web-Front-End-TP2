@@ -43,14 +43,29 @@ const COUNTRY_RESPONSE = {
 }
 
 // Permite simular el fallo de una sola API sin romper la otra.
-const failing = { weather: false, country: false }
+const failing = { weather: false, country: false, countryOrigin: false }
 
-global.fetch = async (url) => {
+global.fetch = async (url, options) => {
   const isWeather = String(url).includes('open-meteo')
   const key = isWeather ? 'weather' : 'country'
 
   if (failing[key]) {
     return { ok: false, status: 503, statusText: 'Service Unavailable' }
+  }
+
+  // Reproduce el 403 que devuelve REST Countries cuando el dominio no está
+  // habilitado en la lista CORS de la API key.
+  if (!isWeather && failing.countryOrigin) {
+    const error = new Error('HTTP 403 - Forbidden')
+    error.code = 'originNotAllowed'
+    throw error
+  }
+
+  if (!isWeather) {
+    const auth = options?.headers?.Authorization
+    if (typeof auth !== 'string' || !auth.startsWith('Bearer ')) {
+      throw new Error('El servicio no envía la cabecera Authorization: Bearer.')
+    }
   }
 
   return {
@@ -149,8 +164,17 @@ await waitFor(() => screen.getByText('Argentina (AR)'))
 check('Reintento vuelve a consultar REST Countries', apiRetry.container.innerHTML.includes('45.808.747'))
 apiRetry.unmount()
 
+// Error 403: dominio no habilitado en la API key.
+failing.countryOrigin = true
+const apiOrigin = renderApp('/api')
+await waitFor(() => screen.getByText(/Valor a agregar/))
+check('REST Countries explica el 403 de origen', apiOrigin.container.innerHTML.includes('allowed origins'))
+check('El 403 no rompe Open-Meteo', apiOrigin.container.innerHTML.includes('16.6'))
+apiOrigin.unmount()
+
 failing.weather = false
 failing.country = false
+failing.countryOrigin = false
 
 // --- Árbol, bitácora, IA y 404 -------------------------------------------
 const tree = renderApp('/arbol')

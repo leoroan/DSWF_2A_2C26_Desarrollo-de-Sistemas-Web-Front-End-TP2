@@ -116,14 +116,48 @@ Pasos:
 2. Copiar `.env.example` como `.env` en la raíz del proyecto.
 3. Reemplazar el valor de `VITE_REST_COUNTRIES_API_KEY` por la clave del equipo.
 
+**Orígenes CORS (importante).** Por default la API bloquea las peticiones que llegan
+desde un navegador. Solo funcionan si el **hostname** de la página está en la lista de
+*allowed origins* de la API key, que se configura en https://restcountries.com/api-keys.
+
+En ese campo hay que escribir **solo hostnames, sin protocolo, puerto ni ruta**:
+
+| Uso | Valor a escribir |
+| --- | --- |
+| Desarrollo (`npm run dev`) | `localhost` |
+| Build local (`npm run preview`) | `localhost` |
+| Producción | `tu-proyecto.vercel.app` (el dominio, sin `https://`) |
+
+Como es una lista separada por comas, se puede pegar todo junto:
+
+```text
+localhost,127.0.0.1,tu-proyecto.vercel.app
+```
+
+Detalles que hacen fallar la configuración:
+
+- No incluir el protocolo: hay que escribir `localhost`, no `http://localhost`.
+- No incluir el puerto: `localhost` ya cubre el 5173 y el 4173.
+- No incluir la ruta: `tu-proyecto.vercel.app`, no `/datos`.
+- El subdominio es parte del nombre: `www.ejemplo.com` es distinto de `ejemplo.com`.
+- Las IP también se soportan, por ejemplo `127.0.0.1`.
+
+Si falta el hostname, la API responde `403` con el código `originNotAllowed`, la
+tarjeta del país no carga y la interfaz muestra el hostname exacto que hay que agregar.
+
+> Las peticiones **sin** header `Origin` (por ejemplo, desde un script de Node o
+> `curl`) no están afectadas por CORS. Por eso la API puede seeming funcionar en la
+> terminal y fallar en el navegador.
+
 La clave **no se sube al repositorio**: `.env` está en `.gitignore` y solo se versiona
 `.env.example`. Además, como las variables `VITE_*` de Vite se incrustan en el bundle
 del navegador, esta clave es de uso público del frontend y **no es un secreto real**;
 nunca debe usarse una clave privada.
 
 Si la variable no está definida, la aplicación usa la demo key oficial `rc_live_demo`
-para poder probar la integración. La demo key devuelve un país de ejemplo, y la
-interfaz lo avisa explícitamente.
+para poder probar la integración. La demo key devuelve siempre un país de ejemplo
+(Canadá), solo funciona desde los orígenes de REST Countries y la interfaz lo avisa
+de forma explícita.
 
 ## Deploy
 

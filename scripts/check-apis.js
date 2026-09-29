@@ -21,7 +21,7 @@ try {
   fail('Open-Meteo real: ' + error.message)
 }
 
-for (const country of ['argentina', 'chile', 'uruguay']) {
+for (const country of ['Argentina', 'Chile', 'Uruguay', 'Brazil', 'Spain']) {
   try {
     const c = await getCountry(country)
     const ok = typeof c.name === 'string' && typeof c.capital === 'string'
