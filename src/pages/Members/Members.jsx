@@ -2,6 +2,8 @@ import { Link } from 'react-router-dom'
 import PageHeader from '../../components/common/PageHeader'
 import MemberList from '../../components/team/MemberList'
 import { teamMembers } from '../../data/team'
+import FondoCiudad from '../../components/layout/FondoCiudad';
+
 
 /** Listado de integrantes (ruta /integrantes). */
 function Members() {

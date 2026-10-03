@@ -1,9 +1,9 @@
- 
-    const ACCESS_KEY = "UGvBBf-Nxe5VvS5ZUtyDcpsmvwn4V9XMhBLpS-VxrHQ"; 
-    const CIUDAD = "Buenos Aires";
+// api/unsplash.js
 
-   async function obtenerFotoCiudad() {
-   
+const ACCESS_KEY = "UGvBBf-Nxe5VvS5ZUtyDcpsmvwn4V9XMhBLpS-VxrHQ"; 
+const CIUDAD = "Buenos Aires";
+
+export async function obtenerFotoCiudad() {
     const baseURL = "https://api.unsplash.com/photos/random";
     
     const parametros = new URLSearchParams({
@@ -24,39 +24,29 @@
 
         const datos = await respuesta.json();
         
-        // El endpoint random con count=1 devuelve un arreglo directo de fotos
         if (datos && datos.length > 0) {
-            const foto = datos[0]; //el primer objeto del arreglo aleatorio
-            
-            document.getElementById('capa-fondo').style.backgroundImage = `url('${foto.urls.regular}')`;
-            
-            const divCreditos = document.getElementById('capa-creditos');
-            divCreditos.innerHTML = `
-                <a class="creditos" href="${foto.user.links.html}?utm_source=proyecto_grupal&utm_medium=referral" target="_blank">
-                    Foto por ${foto.user.name} en Unsplash
-                </a>
-            `;
-        } else {
-            usarImagenRespaldo();
+            const foto = datos[0];
+            return {
+                url: foto.urls.regular,
+                autor: foto.user.name,
+                linkAutor: `${foto.user.links.html}?utm_source=proyecto_grupal&utm_medium=referral`,
+                esOffline: false
+            };
         }
     } catch (error) {
         console.warn("La API falló o bloqueó la solicitud. Usando imagen de respaldo local...", error);
-        usarImagenRespaldo();
     }
+
+    // Retorno de respaldo si falla el bloque try o el arreglo viene vacío
+    return obtenerImagenRespaldo();
 }
 
-
-
-    // si la API excede su cuota o falla la red
-    function usarImagenRespaldo() {
-        const fotoRespaldo = "https://unsplash.com";
-        document.getElementById('capa-fondo').style.backgroundImage = `url('${fotoRespaldo}')`;
-        
-        const divCreditos = document.getElementById('capa-creditos');
-        divCreditos.innerHTML = `
-            <span class="creditos">Buenos Aires (Vista offline)</span>
-        `;
-    }
-
-    // Ejecutar la función inmediatamente al cargar el archivo
-    obtenerFotoCiudad();
+function obtenerImagenRespaldo() {
+    return {
+        // NOTA: Asegúrate de poner una URL de imagen real aquí, ya que 'unsplash.com' a secas no es un archivo de imagen.
+        url: "https://unsplash.com", 
+        autor: "Buenos Aires (Vista offline)",
+        linkAutor: null,
+        esOffline: true
+    };
+}
