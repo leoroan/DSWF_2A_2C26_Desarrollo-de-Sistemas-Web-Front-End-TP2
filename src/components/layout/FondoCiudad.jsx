@@ -1,8 +1,7 @@
-
+// src/components/layout/FondoCiudad.jsx
 import { useState, useEffect } from 'react';
-import { obtenerFotoCiudad } from '../service/fondo'; // Apuntando a tu carpeta service
+import { obtenerFotoCiudad } from '../../services/fondo'; 
 
-// 1. Añadimos { children } como parámetro de la función
 export default function FondoCiudad({ children }) {
     const [fotoData, setFotoData] = useState({
         url: '',
@@ -19,36 +18,37 @@ export default function FondoCiudad({ children }) {
         cargarImagen();
     }, []);
 
-    const estiloFondo = {
-        backgroundImage: fotoData.url ? `url('${fotoData.url}')` : 'none',
+    const estiloBanner = {
+        backgroundImage: fotoData.url ? `linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.6)), url('${fotoData.url}')` : 'none',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        width: '100vw',
-        height: '100vh',
+        width: '100%',            // Ocupa todo el ancho disponible
+        height: '250px',          // Limitamos el largo/alto (puedes cambiarlo a 300px si lo quieres más alto)
         position: 'relative',
-        overflowY: 'auto' // Permite hacer scroll si la lista de miembros es muy larga
+        display: 'flex',
+        alignItems: 'flex-end',   // Alinea la foto personal hacia la parte inferior del banner
+        justifyContent: 'center', // Centra la foto horizontalmente
+        paddingBottom: '0px',
+        marginBottom: '50px'      // Espacio abajo para que el contenido no se encime al flotar la foto
     };
 
     return (
-        <div style={estiloFondo} id="capa-fondo">
+        <div style={estiloBanner} id="banner-ciudad">
             
-            {/* 2. Renderizamos 'children' aquí para que el contenido de la página se dibuje sobre el fondo */}
+            {/* Aquí adentro caerá la foto de tus compañeros */}
             {children}
 
-            <div id="capa-creditos" style={{ position: 'absolute', bottom: '20px', left: '20px', zIndex: 10 }}>
-                {fotoData.esOffline ? (
-                    <span className="creditos">{fotoData.autor}</span>
-                ) : (
-                    fotoData.autor && (
-                        <a 
-                            className="creditos" 
-                            href={fotoData.linkAutor} 
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                        >
-                            Foto por {fotoData.autor} en Unsplash
-                        </a>
-                    )
+            {/* Créditos en la esquina inferior derecha del banner */}
+            <div style={{ position: 'absolute', bottom: '10px', right: '15px', zIndex: 10, fontSize: '11px' }}>
+                {!fotoData.esOffline && fotoData.autor && (
+                    <a 
+                        href={fotoData.linkAutor} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        style={{ color: '#fff', textDecoration: 'none', background: 'rgba(0,0,0,0.4)', padding: '4px 8px', borderRadius: '4px' }}
+                    >
+                        Foto por {fotoData.autor}
+                    </a>
                 )}
             </div>
         </div>
