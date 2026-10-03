@@ -40,11 +40,13 @@ function MemberProfile() {
         backLabel="Volver a integrantes"
       />
 
-      <FondoCiudad>
+      <FondoCiudad ciudad={member.city}>
         <div style={{ transform: 'translateY(50px)', width: '100%', maxWidth: '450px', padding: '0 20px', zIndex: 5 }}>
           <MemberCard member={member} isLink={false} />
         </div>
       </FondoCiudad>
+
+      
 
       {hasDetails && (
         <section className="page-section" aria-labelledby="member-details-title">
