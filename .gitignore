@@ -39,3 +39,6 @@ inst2.log
 jsdom-install.log
 tl.log
 verif.log
+
+# Archivos comprimidos
+*.rar

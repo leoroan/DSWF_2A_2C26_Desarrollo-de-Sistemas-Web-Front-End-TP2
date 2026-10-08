@@ -4,6 +4,8 @@ import PageHeader from '../../components/common/PageHeader'
 import MemberCard from '../../components/team/MemberCard'
 import { getMemberById } from '../../data/team'
 import '../../components/common/Page.css'
+import FondoCiudad from '../../components/layout/FondoCiudad';
+
 
 /** Perfil individual de un integrante (ruta /integrantes/:id). */
 function MemberProfile() {
@@ -38,7 +40,13 @@ function MemberProfile() {
         backLabel="Volver a integrantes"
       />
 
-      <MemberCard member={member} isLink={false} />
+      <FondoCiudad ciudad={member.city}>
+        <div style={{ transform: 'translateY(50px)', width: '100%', maxWidth: '450px', padding: '0 20px', zIndex: 5 }}>
+          <MemberCard member={member} isLink={false} />
+        </div>
+      </FondoCiudad>
+
+      
 
       {hasDetails && (
         <section className="page-section" aria-labelledby="member-details-title">
