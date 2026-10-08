@@ -358,6 +358,20 @@ check(
   "Bitácora con entradas expandibles",
   log.container.querySelectorAll(".changelog-entry details").length > 0,
 );
+check(
+  "Bitácora agrupada en 4 etapas",
+  log.container.querySelectorAll(".changelog-stage").length === 4,
+);
+check(
+  "Bitácora muestra aporte por integrante",
+  log.container.innerHTML.includes("Aporte por integrante") &&
+    log.container.innerHTML.includes("Leandro Maselli") &&
+    log.container.innerHTML.includes("Nidia Elias"),
+);
+check(
+  "Bitácora sin PENDIENTE",
+  !log.container.innerHTML.includes("PENDIENTE"),
+);
 log.unmount();
 // --- Portada / -----------------------------------------------------------
 const home = renderApp("/");

@@ -1,58 +1,177 @@
 [
   {
-    "id": 1,
-    "date": "PENDIENTE",
-    "status": "pendiente",
-    "title": "Definición del equipo y de la propuesta",
-    "description": "PENDIENTE - Completar por el equipo: acuerdo sobre el nombre del proyecto, la temática de los datos y el reparto de responsabilidades."
+    "id": "etapa-1",
+    "etapa": "Etapa 1",
+    "periodo": "29 sep 2026",
+    "titulo": "Arranque: repo, estructura y navegacion",
+    "resumen": "Creacion del repositorio, estructura de carpetas y navegacion base con portada, integrantes, datos y APIs.",
+    "aporte": [
+      {
+        "integrante": "Leandro Maselli",
+        "detalle": "Inicializo el proyecto: navegacion, records.json, team.js, router con todas las paginas, servicios Open-Meteo y REST Countries, y config de Vite y Vercel."
+      },
+      {
+        "integrante": "Javier Canteros",
+        "detalle": "Definió los estilos base del proyecto y la identidad visual inicial documentada en Docs/diseno.md, ademas de ajustes al proxy de paises."
+      }
+    ],
+    "entradas": [
+      {
+        "id": 1,
+        "date": "2026-09-29",
+        "status": "completado",
+        "title": "Creacion del repo y estructura de carpetas",
+        "description": "Se creo el repositorio y se definieron las capas: pages, components, data, services y router, con Vite, ESLint y despliegue en Vercel."
+      },
+      {
+        "id": 2,
+        "date": "2026-09-29",
+        "status": "completado",
+        "title": "Navegacion, layout y sidebar",
+        "description": "Layout comun con Sidebar y Outlet usando React Router y NavLink para la seccion activa, con adaptacion a panel movil."
+      },
+      {
+        "id": 3,
+        "date": "2026-09-29",
+        "status": "completado",
+        "title": "Portada y carga de informacion del equipo",
+        "description": "Portada del equipo y listado de integrantes con MemberCard y MemberList, alimentados desde src/data/team.js."
+      },
+      {
+        "id": 4,
+        "date": "2026-09-29",
+        "status": "completado",
+        "title": "Mejora de errores y CORS en REST Countries",
+        "description": "Se documento el manejo de CORS y se mejoro la gestion de errores del servicio de paises con mensajes claros."
+      }
+    ]
   },
   {
-    "id": 2,
-    "date": "PENDIENTE",
-    "status": "pendiente",
-    "title": "Definición de la estructura de carpetas",
-    "description": "Se definieron las capas del proyecto: pages, components, data, services y router, siguiendo la separación de responsabilidades pedida en la consigna."
+    "id": "etapa-2",
+    "etapa": "Etapa 2",
+    "periodo": "1-3 oct 2026",
+    "titulo": "Integrantes: perfiles y fotos de ciudad",
+    "resumen": "Cada integrante sumo su perfil con ciudad y se implemento el banner con foto de su lugar.",
+    "aporte": [
+      {
+        "integrante": "Nidia Elias",
+        "detalle": "Implemento el fondo de ciudad en los perfiles: servicio de fotos, componente FondoCiudad y variable city en team.js."
+      },
+      {
+        "integrante": "Damian Pelisare",
+        "detalle": "Completo la portada del equipo con su informacion personal en team.js."
+      }
+    ],
+    "entradas": [
+      {
+        "id": 5,
+        "date": "2026-10-01",
+        "status": "completado",
+        "title": "Servicio de fotos de ciudad",
+        "description": "Se creo el servicio de fotos con la API de Unsplash para ilustrar el lugar de cada integrante."
+      },
+      {
+        "id": 6,
+        "date": "2026-10-03",
+        "status": "completado",
+        "title": "Banner en perfiles individuales",
+        "description": "Se agrego FondoCiudad a /integrantes/:id con la foto de la ciudad declarada en teamMembers[].city."
+      },
+      {
+        "id": 7,
+        "date": "2026-10-03",
+        "status": "completado",
+        "title": "Datos de integrantes y ciudades",
+        "description": "Se cargaron nombres, roles, ciudades y GitHub de los cinco integrantes en src/data/team.js."
+      }
+    ]
   },
   {
-    "id": 3,
-    "date": "PENDIENTE",
-    "status": "pendiente",
-    "title": "Implementación de la navegación y la sidebar",
-    "description": "Se creó el layout común con Sidebar y Outlet, usando React Router y NavLink para identificar la sección activa. La sidebar quedó preparada para convertirse en panel móvil."
+    "id": "etapa-3",
+    "etapa": "Etapa 3",
+    "periodo": "8 oct 2026",
+    "titulo": "Datos locales, diseno y estilos",
+    "resumen": "Seccion Datos con busqueda y filtro, mas la consolidacion del diseno con variables CSS y layout responsive.",
+    "aporte": [
+      {
+        "integrante": "Maximiliano Quinteros",
+        "detalle": "Aporto su perfil e informacion personal a la seccion de integrantes."
+      },
+      {
+        "integrante": "Leandro Maselli",
+        "detalle": "Consolido los estilos con variables CSS, mejoro el layout responsive y ordeno las tarjetas de API."
+      }
+    ],
+    "entradas": [
+      {
+        "id": 8,
+        "date": "2026-10-08",
+        "status": "completado",
+        "title": "Datos locales, busqueda y filtro",
+        "description": "records.json con 24 registros, busqueda textual, filtro por categoria, mensaje de sin resultados y limpiar filtros."
+      },
+      {
+        "id": 9,
+        "date": "2026-10-08",
+        "status": "completado",
+        "title": "Diseno y estilos consolidados",
+        "description": "Estilos unificados con variables CSS, sidebar movil con backdrop y Escape, tarjetas de datos y API pulidas."
+      },
+      {
+        "id": 10,
+        "date": "2026-10-08",
+        "status": "completado",
+        "title": "Arbol de componentes y seccion de IA",
+        "description": "Secciones /arbol, /bitacora y /ia alimentadas por datos centralizados en src/data."
+      }
+    ]
   },
   {
-    "id": 4,
-    "date": "PENDIENTE",
-    "status": "pendiente",
-    "title": "Portada y perfiles de integrantes",
-    "description": "Se implementaron la portada del equipo y las rutas individuales /integrantes/:id, con componentes reutilizentes MemberCard y MemberList."
-  },
-  {
-    "id": 5,
-    "date": "PENDIENTE",
-    "status": "pendiente",
-    "title": "Datos locales, búsqueda y filtro",
-    "description": "Se cargó records.json con 24 registros y se implementaron la búsqueda textual, el filtro por categoría, el mensaje de sin resultados y el botón de limpiar filtros."
-  },
-  {
-    "id": 6,
-    "date": "PENDIENTE",
-    "status": "pendiente",
-    "title": "Integración de APIs públicas",
-    "description": "La sección /api quedó migrada a dos APIs públicas reales: Open-Meteo para el clima de Buenos Aires y REST Countries (v5) para información de países, con servicios separados y estados independientes de carga y error."
-  },
-  {
-    "id": 7,
-    "date": "PENDIENTE",
-    "status": "pendiente",
-    "title": "Árbol de componentes, bitácora y sección de IA",
-    "description": "Se agregaron las secciones /arbol, /bitacora y /ia, todas alimentadas por archivos de datosCentralizados en src/data."
-  },
-  {
-    "id": 8,
-    "date": "PENDIENTE",
-    "status": "pendiente",
-    "title": "Verificación de build y lint",
-    "description": "Se ejecutaron npm run build y npm run lint para comprobar que el proyecto compila sin errores antes de la entrega."
+    "id": "etapa-4",
+    "etapa": "Etapa 4",
+    "periodo": "8 oct 2026",
+    "titulo": "APIs: pais elegido y clima de su capital",
+    "resumen": "La page /api quedo unificada: un selector muestra los datos del pais y la temperatura de su capital, con claves solo en el servidor.",
+    "aporte": [
+      {
+        "integrante": "Leandro Maselli",
+        "detalle": "Unifico /api con selector que pide pais y clima en paralelo, proxies en api/, fix de Vercel y scripts de verificacion."
+      },
+      {
+        "integrante": "Javier Canteros",
+        "detalle": "Base de estilos de tarjetas de API y chequeos iniciales del proxy de paises."
+      }
+    ],
+    "entradas": [
+      {
+        "id": 11,
+        "date": "2026-10-08",
+        "status": "completado",
+        "title": "Integracion de APIs publicas",
+        "description": "Open-Meteo para el clima de la capital elegida y REST Countries v5 para el pais, con estados independientes."
+      },
+      {
+        "id": 12,
+        "date": "2026-10-08",
+        "status": "completado",
+        "title": "Proxies sin exponer claves",
+        "description": "Claves solo en el servidor (api/countries.js y api/city-photo.js); el navegador consulta sin credenciales."
+      },
+      {
+        "id": 13,
+        "date": "2026-10-08",
+        "status": "completado",
+        "title": "Fotos con fallback por ciudad",
+        "description": "El proxy prueba variantes de especifica a general para pueblos chicos; si todo falla usa respaldo local."
+      },
+      {
+        "id": 14,
+        "date": "2026-10-08",
+        "status": "completado",
+        "title": "Verificacion completa",
+        "description": "lint sin errores, smoke test con 38 comprobaciones, chequeos de proxies y build en dist/."
+      }
+    ]
   }
 ]
+

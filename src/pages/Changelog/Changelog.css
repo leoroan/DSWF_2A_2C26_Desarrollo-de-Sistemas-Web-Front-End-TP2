@@ -1,0 +1,15 @@
+.changelog-stage { background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; }
+.changelog-stage h2 { margin: 0; font-size: 1.25rem; }
+.changelog-stage__header { display: flex; gap: 16px; align-items: flex-start; margin-bottom: 16px; }
+.changelog-stage__badge { flex-shrink: 0; background: var(--accent); color: #fff; font-weight: 700; font-size: .75rem; letter-spacing: .06em; text-transform: uppercase; padding: 6px 12px; border-radius: 30px; }
+.changelog-stage__period { margin: 4px 0 0; color: var(--muted); font-size: .85rem; }
+.changelog-stage__subtitle { margin: 20px 0 8px; font-size: 1rem; }
+.changelog-stage__team { margin: 0 0 16px; padding-left: 20px; display: grid; gap: 6px; font-size: .88rem; }
+.changelog-timeline { list-style: none; margin: 0; padding: 0 0 0 12px; border-left: 2px solid var(--accent-soft); display: grid; gap: 12px; }
+.changelog-timeline__item { position: relative; padding-left: 12px; }
+.changelog-timeline__dot { position: absolute; left: -19px; top: 26px; width: 12px; height: 12px; border-radius: 50%; background: var(--accent); border: 2px solid #fff; box-shadow: 0 0 0 2px var(--accent-soft); }
+.changelog-timeline__item .changelog-entry { height: auto; }
+@media (max-width: 600px) {
+  .changelog-stage { padding: 18px; }
+  .changelog-stage__header { flex-direction: column; }
+}
