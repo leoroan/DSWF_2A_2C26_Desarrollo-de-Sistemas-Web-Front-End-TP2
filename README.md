@@ -1,15 +1,10 @@
-# PENDIENTE - Nombre del proyecto (TP2 DSWF)
-
-> **Este README contiene placeholders.** Los datos marcados como `PENDIENTE` deben ser
-> completados por el equipo antes de la entrega. No se inventaron nombres, usuarios de
-> GitHub, URLs de despliegue ni herramientas de IA.
-
-## Descripción
+# Espacio de ideas - TP2 DSWF
 
 Aplicación web desarrollada en **React** con **Vite** y **React Router**. Presenta al
 equipo y organiza su información en secciones navegables: portada, integrantes con perfiles
-individuales, datos locales con búsqueda y filtro, consulta a una API pública, árbol de
-componentes, bitácora del proyecto y declaración de uso de IA.
+individuales y foto de su ciudad, datos locales con búsqueda y filtro, consulta a APIs
+públicas (país + clima de su capital), árbol de componentes, bitácora por etapas y
+declaración de uso de IA.
 
 ## Demo
 
@@ -22,6 +17,7 @@ componentes, bitácora del proyecto y declaración de uso de IA.
 - [Integrantes](#integrantes)
 - [Funcionalidades](#funcionalidades)
 - [Uso de IA](#uso-de-ia)
+- [APIs utilizadas](#apis-utilizadas)
 - [Deploy](#deploy)
 - [Instalación local](#instalación-local)
 - [Estructura del proyecto](#estructura-del-proyecto)
@@ -29,22 +25,37 @@ componentes, bitácora del proyecto y declaración de uso de IA.
 
 ## Integrantes
 
-> Completar con los datos reales del equipo. La misma información está en `src/data/team.js`.
+La misma información está en `src/data/team.js` y se muestra en `/integrantes`.
 
-### Nombre Apellido
+### Leandro Maselli
 
-- GitHub: `URL_PENDIENTE`
-- Responsabilidad: PENDIENTE
+- GitHub: `https://myselfproductions.me/DSWF_2A_2C26_Desarrollo-de-Sistemas-Web-Front-End-/`
+- Ciudad: La Plata, Argentina
+- Responsabilidad: Estructura del proyecto, proxies de APIs sin exponer claves, page `/api` unificada y scripts de verificación.
 
-### Nombre Apellido
+### Javier Canteros
 
-- GitHub: `URL_PENDIENTE`
-- Responsabilidad: PENDIENTE
+- GitHub: `https://zirocool3.github.io/pfo1-CanterosJavier/`
+- Ciudad: Resistencia, Chaco, Argentina
+- Responsabilidad: Estilos base, identidad visual inicial y tarjetas de API.
 
-### Nombre Apellido
+### Maximiliano Quinteros
 
-- GitHub: `URL_PENDIENTE`
-- Responsabilidad: PENDIENTE
+- GitHub: `https://github.com/Maxi22xT/Maximiliano-Quinteros-Front-End-IFST-29`
+- Ciudad: Córdoba, Argentina
+- Responsabilidad: Perfil personal y revisión de datos del equipo.
+
+### Damián Pelisare
+
+- GitHub: `https://github.com/Damian-E/ifts_frontEnd`
+- Ciudad: Buenos Aires, Argentina
+- Responsabilidad: Portada del equipo y revisión de perfiles.
+
+### Nidia Elías
+
+- GitHub: `https://github.com/nidia-elias/portfolio/`
+- Ciudad: Mar de Ajo, La Costa, Argentina
+- Responsabilidad: Banner de ciudad por perfil (FondoCiudad) y variable `city` en `team.js`.
 
 ## Funcionalidades
 
@@ -52,32 +63,38 @@ componentes, bitácora del proyecto y declaración de uso de IA.
 - **Sidebar responsive**: en desktop siempre visible; en viewport pequeño se convierte en
   panel desplegable con botón de apertura/cierre. Marca la sección activa con `NavLink`.
 - **Portada del equipo** (`/`) con presentación y acceso a integrantes.
-- **Perfiles individuales** (`/integrantes/:id`), páginas React reales con detalle
-  desplegable y manejo de id inexistente.
+- **Perfiles individuales** (`/integrantes/:id`), con banner de foto de la ciudad
+  del integrante (Unsplash vía proxy `/api/city-photo`, con respaldo local),
+  detalle desplegable y manejo de id inexistente.
 - **Datos locales JSON** (`src/data/records.json`, 24 registros) renderizados dinámicamente,
   con detalle expandible por registro.
 - **Búsqueda textual** y **filtro por categoría** combinables, con mensaje de
   "No se encontraron resultados." y botón "Limpiar filtros".
-- **Dos APIs públicas reales**: Open-Meteo (clima) y REST Countries (países), con
-  estados `loading` / `success` / `error` y botón de actualizar/reintento independientes.
-  Open-Meteo no requiere clave; la de REST Countries se configura por variable de entorno.
+- **Selector de país + clima de su capital** (`/api`): REST Countries (datos) y
+  Open-Meteo (temperatura), con estados `loading` / `success` / `error`
+  independientes y reintento. Open-Meteo no requiere clave; las de REST Countries
+  y Unsplash viven solo en el servidor.
 - **Árbol de componentes** de la jerarquía real, interactivo y expandible.
-- **Bitácora** del proceso de desarrollo.
-- **Declaración de uso de IA** por integrante, distinguiendo aplicación y modelo.
+- **Bitácora por etapas** (`/bitacora`): 4 etapas con período, aporte por integrante
+  y línea de tiempo expandible, desde `src/data/changelog.json`.
+- **Declaración de uso de IA** (`/ia`) por integrante, distinguiendo aplicación y modelo.
 
 ## Uso de IA
 
-> Completar con la información real. La misma tabla se muestra en la sección `/ia` de la
-> aplicación y se alimenta desde `src/data/ai-usage.js`.
+La misma tabla se muestra en la sección `/ia` y se alimenta desde `src/data/ai-usage.js`.
+Es una propuesta coherente con el trabajo registrado en git: cada integrante debe validar
+la herramienta y el modelo exactos antes de la entrega.
 
 | Integrante | Aplicación | Modelo | Uso |
 | ---------- | ---------- | ------ | --- |
-| PENDIENTE  | PENDIENTE  | PENDIENTE | PENDIENTE |
-| PENDIENTE  | PENDIENTE  | PENDIENTE | PENDIENTE |
-| PENDIENTE  | PENDIENTE  | PENDIENTE | PENDIENTE |
+| Leandro Maselli | Asistente IA integrado al IDE (Muse Spark) | Modelo del asistente (validar versión exacta) | Proxies `/api/countries` y `/api/city-photo` sin exponer claves, `/api` unificada país + clima, fix de Vercel y scripts de verificación. |
+| Javier Canteros | Asistente IA integrado al IDE (Muse Spark) | Modelo del asistente (validar versión exacta) | Estilos base, tarjetas de API y chequeos iniciales del proxy de países. |
+| Nidia Elías | Asistente IA integrado al IDE (Muse Spark) | Modelo del asistente (validar versión exacta) | Banner FondoCiudad, servicio de fotos y variable `city` en `team.js`. |
+| Damián Pelisare | Asistente IA integrado al IDE (Muse Spark) | Modelo del asistente (validar versión exacta) | Portada del equipo y revisión de perfiles. |
+| Maximiliano Quinteros | Asistente IA integrado al IDE (Muse Spark) | Modelo del asistente (validar versión exacta) | Perfil personal y prueba de navegación. |
 
-**Aclaración de conceptos:** *aplicación* es la herramienta utilizada (por ejemplo, un
-chat de IA) y *modelo* es el modelo concreto empleado en esa herramienta.
+**Aclaración de conceptos:** *aplicación* es la herramienta utilizada y *modelo* es el
+modelo concreto empleado en esa herramienta.
 
 ## APIs utilizadas
 
@@ -178,15 +195,19 @@ src/
 │   ├── api/{WeatherCard,CountryCard}.jsx
 │   ├── common/PageHeader.jsx
 │   ├── data/{DataCard,DataList,SearchInput,FilterSelect}.jsx
-│   ├── layout/{AppLayout,Sidebar}.jsx
+│   ├── layout/{AppLayout,Sidebar,FondoCiudad}.jsx
 │   ├── team/{TeamIntro,MemberCard,MemberList}.jsx
 │   └── tree/ComponentTree.jsx
 ├── data/{team.js,navigation.js,records.json,changelog.json,ai-usage.js,componentTree.js}
 ├── pages/{Home,Members,MemberProfile,Data,PublicApi,ComponentTree,Changelog,AiUsage,NotFound}
-├── services/{openMeteo.js,restCountries.js}
+│   └── Changelog/Changelog.css (timeline por etapas)
+├── services/{openMeteo.js,restCountries.js,fondo.js}
 ├── router/router.jsx
 ├── App.jsx
 └── main.jsx
+api/{countries.js,city-photo.js}  # proxies servidor (Vercel Functions)
+scripts/{smoke-check,check-apis,check-countries-proxy,check-country-fields,check-city-photo}.js
+public/foto-respaldo.svg
 ```
 
 ## Capturas
@@ -195,9 +216,8 @@ Pendiente de agregar.
 
 ## Pendientes para el equipo
 
-- [ ] Completar datos del equipo en `src/data/team.js` y en la sección Integrantes de este README.
-- [ ] Completar `src/data/ai-usage.js` y la tabla de Uso de IA.
-- [ ] Completar las fechas reales de `src/data/changelog.json`.
+- [ ] Cada integrante debe validar su fila de Uso de IA (`src/data/ai-usage.js`): herramienta y modelo exactos.
+- [ ] Definir URL de demo y completar el enlace en `src/data/team.js` (`demoUrl`) y en este README.
 - [ ] Publicar el repositorio y verificar acceso sin autenticación (criterio 1).
 - [ ] Invitar a todos los integrantes y verificar que aceptaron la invitación (criterio 3).
 - [ ] Aplicar la identidad visual definitiva (criterio 9, fuera del alcance de esta base).

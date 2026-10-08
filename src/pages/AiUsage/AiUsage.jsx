@@ -14,9 +14,10 @@ function AiUsage() {
       />
 
       <p>
-        La información se completa en <code>src/data/ai-usage.js</code> y se replica en el
-        README del repositorio. Todos los campos están marcados como PENDIENTE: el equipo debe
-        completarlos antes de la entrega.
+        La información se edita en <code>src/data/ai-usage.js</code> y se replica en el
+        README del repositorio. La tabla es una propuesta coherente con el trabajo
+        registrado en git: cada integrante debe validar la herramienta y el modelo
+        exactos antes de la entrega.
       </p>
 
       <div className="table-wrapper">
