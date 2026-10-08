@@ -10,7 +10,7 @@
 
 const FORECAST_URL = 'https://api.open-meteo.com/v1/forecast'
 
-/** Ubicación fija para mantener el ejemplo simple. */
+/** Ubicación por defecto: capital del país inicial. */
 export const DEFAULT_LOCATION = {
   name: 'Buenos Aires',
   latitude: -34.6037,

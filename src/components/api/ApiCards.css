@@ -1,9 +1,9 @@
 .api-card {
   height: 100%;
-  border: 1px solid #d7dde3;
-  border-radius: 6px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
   background-color: #ffffff;
-  padding: 1rem;
+  padding: 24px;
 }
 
 .api-card__name {
@@ -12,8 +12,9 @@
 
 .api-card__highlight {
   margin: 0 0 0.5rem;
-  font-size: 1.6rem;
+  font-size: 2.3rem;
   font-weight: 700;
+  color: var(--accent);
 }
 
 .api-card__flag {
@@ -27,7 +28,7 @@
 
 .api-card__data {
   display: grid;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: minmax(0, auto) minmax(0, 1fr);
   gap: 0.15rem 0.75rem;
   margin: 0.75rem 0 0;
   font-size: 0.9rem;
@@ -40,9 +41,5 @@
 
 .api-card__data dd {
   margin: 0;
+  overflow-wrap: anywhere;
 }
-
-.api-card { border-color: var(--border); border-radius: var(--radius); padding: 24px; }
-.api-card__highlight { color: var(--accent); font-size: 2.3rem; }
-.api-card__data { grid-template-columns: minmax(0, auto) minmax(0, 1fr); }
-.api-card__data dd { overflow-wrap: anywhere; }

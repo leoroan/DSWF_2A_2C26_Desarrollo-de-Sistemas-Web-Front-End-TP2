@@ -9,6 +9,11 @@
     "lint": "eslint .",
     "test:smoke": "vite-node scripts/smoke-check.js",
     "check:apis": "vite-node scripts/check-apis.js",
+    "check:proxy": "vite-node scripts/check-countries-proxy.js",
+    "check:fields": "vite-node scripts/check-country-fields.js",
+    "check:photo": "vite-node scripts/check-city-photo.js",
+    "check:all": "npm run check:apis && npm run check:proxy && npm run check:fields && npm run check:photo",
+    "verify": "npm run lint && npm run test:smoke && npm run check:all && npm run build",
     "preview": "vite preview"
   },
   "dependencies": {

@@ -1,29 +1,29 @@
-import { useEffect, useRef, useState } from 'react'
-import { Outlet } from 'react-router-dom'
-import Sidebar from './Sidebar'
-import './AppLayout.css'
+import { useEffect, useRef, useState } from "react";
+import { Outlet } from "react-router-dom";
+import Sidebar from "./Sidebar";
+import "./AppLayout.css";
 
 /**
  * Layout común: mantiene la Sidebar montada mientras el Outlet muestra
  * la página correspondiente a la ruta activa.
  */
 function AppLayout() {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
-  const toggleRef = useRef(null)
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const toggleRef = useRef(null);
 
   useEffect(() => {
-    if (!isSidebarOpen) return
+    if (!isSidebarOpen) return;
     const handleEscape = (event) => {
-      if (event.key === 'Escape') {
-        setIsSidebarOpen(false)
-        toggleRef.current?.focus()
+      if (event.key === "Escape") {
+        setIsSidebarOpen(false);
+        toggleRef.current?.focus();
       }
-    }
-    window.addEventListener('keydown', handleEscape)
-    return () => window.removeEventListener('keydown', handleEscape)
-  }, [isSidebarOpen])
+    };
+    window.addEventListener("keydown", handleEscape);
+    return () => window.removeEventListener("keydown", handleEscape);
+  }, [isSidebarOpen]);
 
-  const closeSidebar = () => setIsSidebarOpen(false)
+  const closeSidebar = () => setIsSidebarOpen(false);
 
   return (
     <div className="app-layout">
@@ -40,13 +40,21 @@ function AppLayout() {
           aria-controls="app-sidebar"
           onClick={() => setIsSidebarOpen((open) => !open)}
         >
-          {isSidebarOpen ? 'Cerrar menú' : 'Abrir menú'}
+          {isSidebarOpen ? "Cerrar menú" : "Abrir menú"}
         </button>
-        <p className="app-layout__header-title">TP2 - Desarrollo de Sistemas Web Front End</p>
+        <p className="app-layout__header-title">
+          TP2 - Desarrollo de Sistemas Web Front End
+        </p>
       </header>
 
       <div className="app-layout__body">
-        {isSidebarOpen && <button className="app-layout__backdrop" aria-label="Cerrar menú lateral" onClick={closeSidebar} />}
+        {isSidebarOpen && (
+          <button
+            className="app-layout__backdrop"
+            aria-label="Cerrar menú lateral"
+            onClick={closeSidebar}
+          />
+        )}
         <Sidebar isOpen={isSidebarOpen} onNavigate={closeSidebar} />
 
         <main id="main-content" className="app-layout__content" tabIndex={-1}>
@@ -54,7 +62,7 @@ function AppLayout() {
         </main>
       </div>
     </div>
-  )
+  );
 }
 
-export default AppLayout
+export default AppLayout;

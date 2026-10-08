@@ -1,17 +1,24 @@
-// El navegador consulta nuestro servidor sin recibir la clave privada.
+// El navegador consulta nuestro proxy (/api/countries) sin credenciales.
+// Las coordenadas son de la capital de cada país y solo se usan para
+// consultar Open-Meteo, que trabaja por latitud/longitud.
 const API_URL = '/api/countries'
 
 export const AVAILABLE_COUNTRIES = [
-  { id: 'Canada', label: 'Canadá' },
-  { id: 'Argentina', label: 'Argentina' },
-  { id: 'Brazil', label: 'Brasil' },
-  { id: 'Chile', label: 'Chile' },
-  { id: 'Uruguay', label: 'Uruguay' },
-  { id: 'Spain', label: 'España' },
+  { id: 'Argentina', label: 'Argentina', capital: 'Buenos Aires', latitude: -34.6037, longitude: -58.3816 },
+  { id: 'Brazil', label: 'Brasil', capital: 'Brasilia', latitude: -15.7939, longitude: -47.8828 },
+  { id: 'Chile', label: 'Chile', capital: 'Santiago', latitude: -33.4489, longitude: -70.6693 },
+  { id: 'Uruguay', label: 'Uruguay', capital: 'Montevideo', latitude: -34.9011, longitude: -56.1645 },
+  { id: 'Spain', label: 'España', capital: 'Madrid', latitude: 40.4168, longitude: -3.7038 },
+  { id: 'Canada', label: 'Canadá', capital: 'Ottawa', latitude: 45.4215, longitude: -75.6972 },
 ]
 
 /** País mostrado por defecto. */
 export const DEFAULT_COUNTRY = 'Argentina'
+
+/** Devuelve la entrada del selector para un id de país. */
+export function getCountryOption(country = DEFAULT_COUNTRY) {
+  return AVAILABLE_COUNTRIES.find((option) => option.id === country) ?? AVAILABLE_COUNTRIES[0]
+}
 
 
 /**

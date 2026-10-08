@@ -7,6 +7,7 @@ import {
   getCountry,
   AVAILABLE_COUNTRIES,
   DEFAULT_COUNTRY,
+  getCountryOption,
 } from '../../services/restCountries'
 import '../../components/common/Page.css'
 
@@ -18,8 +19,7 @@ const STATUS = {
   ERROR: 'error',
 }
 
-
-/** Página de APIs públicas (ruta /api): Open-Meteo y REST Countries. */
+/** Página de APIs públicas (ruta /api): país elegido + clima de su capital. */
 function PublicApi() {
   const [weatherStatus, setWeatherStatus] = useState(STATUS.IDLE)
   const [weather, setWeather] = useState(null)
@@ -28,86 +28,53 @@ function PublicApi() {
   const [country, setCountry] = useState(null)
   const [selectedCountry, setSelectedCountry] = useState(DEFAULT_COUNTRY)
 
-  // Cada API tiene su propia función: el error de una no afecta a la otra.
-  const loadWeather = useCallback(async () => {
-    setWeatherStatus(STATUS.LOADING)
-    try {
-      setWeather(await getWeather())
-      setWeatherStatus(STATUS.SUCCESS)
-    } catch (error) {
-      console.error('Error al consultar Open-Meteo:', error)
-      setWeather(null)
-      setWeatherStatus(STATUS.ERROR)
-    }
-  }, [])
+  const selectedOption = getCountryOption(selectedCountry)
 
-  const loadCountry = useCallback(async () => {
+  // El clima depende del país elegido: cada cambio pide país y clima en paralelo.
+  // Cada API tiene su propio estado: el error de una no afecta a la otra.
+  const loadCountryAndWeather = useCallback(async () => {
+    const option = getCountryOption(selectedCountry)
     setCountryStatus(STATUS.LOADING)
-    try {
-      setCountry(await getCountry(selectedCountry))
+    setWeatherStatus(STATUS.LOADING)
+    setCountry(null)
+    setWeather(null)
+
+    const [countryResult, weatherResult] = await Promise.allSettled([
+      getCountry(option.id),
+      getWeather({ name: option.capital, latitude: option.latitude, longitude: option.longitude }),
+    ])
+
+    if (countryResult.status === 'fulfilled') {
+      setCountry(countryResult.value)
       setCountryStatus(STATUS.SUCCESS)
-    } catch (error) {
-      console.error('Error al consultar REST Countries:', error)
-      setCountry(null)
+    } else {
+      console.error('Error al consultar REST Countries:', countryResult.reason)
       setCountryStatus(STATUS.ERROR)
+    }
+
+    if (weatherResult.status === 'fulfilled') {
+      setWeather(weatherResult.value)
+      setWeatherStatus(STATUS.SUCCESS)
+    } else {
+      console.error('Error al consultar Open-Meteo:', weatherResult.reason)
+      setWeatherStatus(STATUS.ERROR)
     }
   }, [selectedCountry])
 
   useEffect(() => {
-    loadWeather()
-  }, [loadWeather])
-
-  useEffect(() => {
-    loadCountry()
-  }, [loadCountry])
-
+    loadCountryAndWeather()
+  }, [loadCountryAndWeather])
 
   return (
     <>
       <PageHeader
         title="APIs públicas"
-        description="Explorá el clima y la información de países. Cada consulta tiene sus propios estados de carga y error."
+        description="Elegí un país para ver su información y la temperatura actual de su capital. Cada consulta tiene sus propios estados de carga y error."
         backTo="/"
         backLabel="Volver a la portada"
       />
 
-      <section className="page-section" aria-labelledby="open-meteo-title">
-        <h2 id="open-meteo-title">Open-Meteo</h2>
-        <p>
-          Información meteorológica de Buenos Aires, obtenida por coordenadas desde
-          api.open-meteo.com.
-        </p>
-
-        {weatherStatus === STATUS.LOADING && <p role="status">Cargando clima...</p>}
-
-        {weatherStatus === STATUS.ERROR && (
-          <div className="page-empty" role="alert">
-            <p>No se pudo obtener la información meteorológica.</p>
-            <button type="button" className="page-button" onClick={loadWeather}>
-              Reintentar
-            </button>
-          </div>
-        )}
-
-        {weatherStatus === STATUS.SUCCESS && weather && <WeatherCard weather={weather} />}
-
-        {weatherStatus === STATUS.SUCCESS && (
-          <p>
-            <button
-              type="button"
-              className="page-button page-button--secondary"
-              onClick={loadWeather}
-            >
-              Actualizar
-            </button>
-          </p>
-        )}
-      </section>
-
-      <section className="page-section" aria-labelledby="rest-countries-title">
-        <h2 id="rest-countries-title">REST Countries</h2>
-        <p>Información básica de países, obtenida desde api.restcountries.com (versión v5).</p>
-
+      <div className="page-toolbar">
         <div className="field">
           <label className="field__label" htmlFor="country-select">
             País
@@ -124,15 +91,19 @@ function PublicApi() {
             ))}
           </select>
         </div>
+        <p className="page-lead">Clima de {selectedOption.capital} vía Open-Meteo.</p>
+      </div>
+
+      <section className="page-section" aria-labelledby="rest-countries-title">
+        <h2 id="rest-countries-title">REST Countries: {selectedOption.label}</h2>
+        <p>Información básica del país, obtenida desde api.restcountries.com (versión v5).</p>
 
         {countryStatus === STATUS.LOADING && <p role="status">Cargando país...</p>}
-
-
 
         {countryStatus === STATUS.ERROR && (
           <div className="page-empty" role="alert">
             <p>No se pudo obtener la información del país.</p>
-            <button type="button" className="page-button" onClick={loadCountry}>
+            <button type="button" className="page-button" onClick={loadCountryAndWeather}>
               Reintentar
             </button>
           </div>
@@ -140,13 +111,12 @@ function PublicApi() {
 
         {countryStatus === STATUS.SUCCESS && country && (
           <>
-
             <CountryCard country={country} />
             <p>
               <button
                 type="button"
                 className="page-button page-button--secondary"
-                onClick={loadCountry}
+                onClick={loadCountryAndWeather}
               >
                 Actualizar
               </button>
@@ -155,7 +125,38 @@ function PublicApi() {
         )}
       </section>
 
+      <section className="page-section" aria-labelledby="open-meteo-title">
+        <h2 id="open-meteo-title">Open-Meteo: {selectedOption.capital}</h2>
+        <p>
+          Temperatura actual de la capital, obtenida por coordenadas desde
+          api.open-meteo.com.
+        </p>
 
+        {weatherStatus === STATUS.LOADING && <p role="status">Cargando clima...</p>}
+
+        {weatherStatus === STATUS.ERROR && (
+          <div className="page-empty" role="alert">
+            <p>No se pudo obtener la información meteorológica.</p>
+            <button type="button" className="page-button" onClick={loadCountryAndWeather}>
+              Reintentar
+            </button>
+          </div>
+        )}
+
+        {weatherStatus === STATUS.SUCCESS && weather && <WeatherCard weather={weather} />}
+
+        {weatherStatus === STATUS.SUCCESS && (
+          <p>
+            <button
+              type="button"
+              className="page-button page-button--secondary"
+              onClick={loadCountryAndWeather}
+            >
+              Actualizar
+            </button>
+          </p>
+        )}
+      </section>
     </>
   )
 }

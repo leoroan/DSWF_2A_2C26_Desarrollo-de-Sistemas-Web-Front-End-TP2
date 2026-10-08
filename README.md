@@ -81,14 +81,18 @@ chat de IA) y *modelo* es el modelo concreto empleado en esa herramienta.
 
 ## APIs utilizadas
 
-La sección `/api` consume dos APIs públicas reales, cada una con su propio servicio,
-sus estados de carga y error, y su botón de actualizar/reintentar. Un error en una
+La sección `/api` usa un único selector de país: muestra la información del
+país (REST Countries) y la temperatura actual de su capital (Open-Meteo).
+Cada consulta tiene sus propios estados de carga y error, y un error en una
 no afecta a la otra.
 
 ### Open-Meteo
 
-Se utiliza para consultar información meteorológica mediante coordenadas geográficas.
-Devuelve temperatura actual, velocidad del viento y código meteorológico de Buenos Aires.
+Se utiliza para consultar la temperatura actual de la capital del país
+elegido, mediante coordenadas geográficas fijas por país
+(`src/services/restCountries.js`).
+
+Devuelve temperatura actual, velocidad del viento y código meteorológico.
 
 Sitio: https://open-meteo.com/
 
@@ -107,23 +111,40 @@ Servicio: `src/services/restCountries.js`.
 `REST_COUNTRIES_API_KEY`. Este archivo está excluido de Git. Reiniciar Vite después
 de cambiarlo. No usar el prefijo `VITE_`: la clave debe permanecer en el servidor.
 
-React consulta `/api/countries?q=Canada`. La función `api/countries.js` agrega
+React consulta `/api/countries?q=Argentina`. La función `api/countries.js` agrega
 `Authorization: Bearer ...` y consulta REST Countries v5. La misma función se usa
 en desarrollo, en la previsualización local y en Vercel. Solo admite los países
 del selector, limita la espera a diez segundos y devuelve errores sin credenciales.
 
-En Vercel, agregar `REST_COUNTRIES_API_KEY` en Settings → Environment Variables
-para los entornos deseados y volver a desplegar. Sin esa variable, la interfaz
-mostrará el estado de error con la opción de reintentar.
+> Ruta `/api` (página React) ≠ endpoint `/api/countries` (proxy servidor).
+> La página vive en `src/pages/PublicApi/`; el proxy vive en `api/countries.js`
+> y solo existe para no exponer la clave en el navegador.
+
+En Vercel, agregar `REST_COUNTRIES_API_KEY` y `UNSPLASH_ACCESS_KEY` en
+Settings → Environment Variables para los entornos deseados y volver a
+desplegar. Sin esas variables, la interfaz mostrará el estado de error
+con la opción de reintentar (país) o la imagen local de respaldo (foto).
 
 Referencia: [funciones Node.js de Vercel](https://vercel.com/docs/functions/runtimes/node-js).
+
+### Unsplash (foto de ciudad por integrante)
+
+El perfil (`/integrantes/:id`) muestra un banner con una foto de la ciudad
+declarada en `src/data/team.js` (`teamMembers[].city`).
+
+Sitio: https://unsplash.com/developers
+
+Servicio: `src/services/fondo.js`. El navegador consulta
+`/api/city-photo?ciudad=...` sin credenciales; `api/city-photo.js` agrega
+la clave en el servidor. Sin `UNSPLASH_ACCESS_KEY` o si Unsplash falla,
+se usa `/foto-respaldo.svg` local.
 ## Deploy
 
 - URL de producción: `URL_PENDIENTE`
 - Plataforma prevista: Vercel.
-- El archivo `vercel.json` incluye la reescritura de rutas hacia `index.html`, necesaria
-  para que las rutas profundas (por ejemplo `/datos` o `/integrantes/integrante-1`) puedan
-  abrirse directamente.
+- El archivo `vercel.json` reescribe todo a `index.html` excepto `/api/*`,
+  para que las rutas profundas puedan abrirse directamente sin romper
+  el proxy de países en producción.
 
 ## Instalación local
 
@@ -134,14 +155,20 @@ npm run build      # build de producción en dist/
 npm run lint       # análisis estático con ESLint
 npm run test:smoke # smoke test funcional (renderizado, búsqueda, filtro, API)
 npm run check:apis # consulta las APIs reales para verificar los servicios
+npm run check:proxy # verifica el proxy /api/countries sin exponer la clave
+npm run check:fields # verifica campos v5 y normalización del servicio país
+npm run check:photo # verifica el proxy /api/city-photo y el respaldo local
+npm run check:all # corre los cuatro chequeos anteriores
+npm run verify    # lint + smoke + checks + build
 npm run preview    # previsualiza el build de producción
 ```
 
 El smoke test (`scripts/smoke-check.js`) monta la aplicación en un entorno jsdom y
 verifica, entre otras cosas: la sidebar y la sección activa, los 24 registros del JSON,
 la búsqueda, el filtro combinado, el mensaje de sin resultados, el reset, los perfiles
-(válido e inexistente), los estados `success` y `error` de la API, el reintento, el árbol,
-la bitácora y la página 404. La API se simula con `fetch` para no depender de la red.
+(válido con banner de ciudad, respaldo sin fotos e inexistente), los estados
+`success` y `error` de la API, el reintento, el árbol, la bitácora y la página 404.
+La API se simula con `fetch` para no depender de la red.
 
 ## Estructura del proyecto
 

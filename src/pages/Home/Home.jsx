@@ -1,8 +1,8 @@
-import { Link } from 'react-router-dom'
-import PageHeader from '../../components/common/PageHeader'
-import TeamIntro from '../../components/team/TeamIntro'
-import MemberList from '../../components/team/MemberList'
-import { teamMembers } from '../../data/team'
+import { Link } from "react-router-dom";
+import PageHeader from "../../components/common/PageHeader";
+import TeamIntro from "../../components/team/TeamIntro";
+import MemberList from "../../components/team/MemberList";
+import { teamMembers } from "../../data/team";
 
 /** Portada del equipo (ruta /). */
 function Home() {
@@ -23,7 +23,7 @@ function Home() {
         <MemberList members={teamMembers} id="team-members" />
       </section>
     </>
-  )
+  );
 }
 
-export default Home
+export default Home;

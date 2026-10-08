@@ -4,7 +4,7 @@ import PageHeader from '../../components/common/PageHeader'
 import MemberCard from '../../components/team/MemberCard'
 import { getMemberById } from '../../data/team'
 import '../../components/common/Page.css'
-import FondoCiudad from '../../components/layout/FondoCiudad';
+import FondoCiudad from '../../components/layout/FondoCiudad'
 
 
 /** Perfil individual de un integrante (ruta /integrantes/:id). */

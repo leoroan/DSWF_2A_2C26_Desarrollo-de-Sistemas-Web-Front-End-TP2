@@ -14,5 +14,8 @@
 .ai-table th, .ai-table td { border-bottom: 1px solid var(--border); padding: 16px; text-align: left; }
 .ai-table th { background: var(--accent-soft); }
 .page-empty { padding: 28px; border: 1px dashed #b7a5dc; border-radius: var(--radius); background: white; }
+.field { display: grid; gap: 8px; min-width: min(100%, 260px); }
+.field__label { font-weight: 600; font-size: .85rem; }
+.field select { padding: 10px 12px; border: 1px solid var(--border); border-radius: 9px; background: white; font: inherit; }
 .changelog-entry { background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; height: 100%; }
 .changelog-entry summary { display: flex; flex-direction: column; gap: 8px; }

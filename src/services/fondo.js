@@ -1,52 +1,50 @@
-// api/unsplash.js
+/**
+ * Servicio de foto de ciudad (Unsplash vía proxy propio).
+ *
+ * El navegador consulta `/api/city-photo?ciudad=...` sin credenciales.
+ * La clave de Unsplash solo vive en el servidor (`api/city-photo.js`).
+ * Si el servicio no está configurado o falla, se devuelve una imagen
+ * local de respaldo para no romper el perfil.
+ */
 
-const ACCESS_KEY = "UGvBBf-Nxe5VvS5ZUtyDcpsmvwn4V9XMhBLpS-VxrHQ"; 
-const CIUDAD = "Buenos Aires";
+const PHOTO_URL = '/api/city-photo'
 
-export async function obtenerFotoCiudad() {
-    const baseURL = "https://api.unsplash.com/photos/random";
-    
-    const parametros = new URLSearchParams({
-        query: CIUDAD,          
-        orientation: "landscape",
-        count: "1",             
-        client_id: ACCESS_KEY
-    });
+/**
+ * Consulta la foto de una ciudad.
+ * @param {string} ciudad
+ * @returns {Promise<{url: string, autor: string, linkAutor: string|null, esOffline: boolean}>}
+ */
+export async function obtenerFotoCiudad(ciudad = 'Buenos Aires') {
+  try {
+    const response = await fetch(`${PHOTO_URL}?ciudad=${encodeURIComponent(ciudad)}`)
 
-    const urlCompleta = `${baseURL}?${parametros.toString()}`;
-
-    try {
-        const respuesta = await fetch(urlCompleta);
-        
-        if (!respuesta.ok) {
-            throw new Error(`Error en la petición: ${respuesta.status}`);
-        }
-
-        const datos = await respuesta.json();
-        
-        if (datos && datos.length > 0) {
-            const foto = datos[0];
-            return {
-                url: foto.urls.regular,
-                autor: foto.user.name,
-                linkAutor: `${foto.user.links.html}?utm_source=proyecto_grupal&utm_medium=referral`,
-                esOffline: false
-            };
-        }
-    } catch (error) {
-        console.warn("La API falló o bloqueó la solicitud. Usando imagen de respaldo local...", error);
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}`)
     }
 
-    // Retorno de respaldo si falla el bloque try o el arreglo viene vacío
-    return obtenerImagenRespaldo();
+    const payload = await response.json()
+
+    if (!payload?.data?.url) {
+      throw new Error('La API no devolvió la foto solicitada.')
+    }
+
+    return {
+      url: payload.data.url,
+      autor: payload.data.autor ?? '',
+      linkAutor: payload.data.linkAutor ?? null,
+      esOffline: false,
+    }
+  } catch (error) {
+    console.warn('La API de fotos falló. Usando imagen de respaldo local...', error)
+    return obtenerImagenRespaldo(ciudad)
+  }
 }
 
-function obtenerImagenRespaldo() {
-    return {
-        // NOTA: Asegúrate de poner una URL de imagen real aquí, ya que 'unsplash.com' a secas no es un archivo de imagen.
-        url: "https://unsplash.com", 
-        autor: "Buenos Aires (Vista offline)",
-        linkAutor: null,
-        esOffline: true
-    };
+function obtenerImagenRespaldo(ciudad) {
+  return {
+    url: '/foto-respaldo.svg',
+    autor: `${ciudad} (Vista offline)`,
+    linkAutor: null,
+    esOffline: true,
+  }
 }
