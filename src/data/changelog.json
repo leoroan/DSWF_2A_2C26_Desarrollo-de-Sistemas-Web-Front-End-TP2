@@ -172,6 +172,38 @@
         "description": "lint sin errores, smoke test con 38 comprobaciones, chequeos de proxies y build en dist/."
       }
     ]
+  },
+  {
+    "id": "etapa-5",
+    "etapa": "Etapa 5",
+    "periodo": "10-25 oct 2026",
+    "titulo": "Bitácora final y preparación de entrega",
+    "resumen": "Redacción de la bitácora grupal, consolidación final del repositorio y pruebas previas al despliegue.",
+    "aporte": [
+      {
+        "integrante": "Maximiliano Quinteros",
+        "detalle": "Desarrollo y actualización de la bitácora de trabajo grupal (changelog.json), asegurando la coherencia con el desarrollo de las etapas anteriores."
+      },
+      {
+        "integrante": "Equipo Completo",
+        "detalle": "Pruebas de integración finales (testing manual) y revisión de la rúbrica antes del merge a la rama main."
+      }
+    ],
+    "entradas": [
+      {
+        "id": 15,
+        "date": "2026-10-10",
+        "status": "completado",
+        "title": "Actualización de Bitácora Grupal",
+        "description": "Se integró la información consolidada sobre los aportes de cada integrante y las fases de desarrollo a lo largo del proyecto en el changelog."
+      },
+      {
+        "id": 16,
+        "date": "2026-10-25",
+        "status": "pendiente",
+        "title": "Merge final y cierre",
+        "description": "Revisión final de código, merge a la rama main y preparación del repositorio para el deploy en Vercel de cara a la entrega del TP2."
+      }
+    ]
   }
 ]
-
