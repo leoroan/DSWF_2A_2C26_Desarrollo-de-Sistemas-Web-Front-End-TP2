@@ -18,7 +18,7 @@
   letter-spacing: 0.025em;
 }
 .app-layout__header::after {
-  content: "EN CONSTRUCCIÓN";
+  content: "DESARROLLANDO 🚀";
   margin-left: auto;
   color: #5e5484;
   background: var(--accent-soft);
