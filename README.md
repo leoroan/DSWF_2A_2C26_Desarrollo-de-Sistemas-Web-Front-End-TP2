@@ -8,7 +8,7 @@ declaración de uso de IA.
 
 ## Demo
 
-[Ver aplicación](URL_PENDIENTE)
+[🚀 **Ver la aplicación en vivo**](https://dswf-2-a-2-c26-desarrollo-de-sistem-psi.vercel.app/)
 
 ## Índice
 
@@ -158,7 +158,7 @@ se usa `/foto-respaldo.svg` local.
 
 ## Deploy
 
-- URL de producción: `URL_PENDIENTE`
+- URL de producción: [dswf-2-a-2-c26-desarrollo-de-sistem-psi.vercel.app](https://dswf-2-a-2-c26-desarrollo-de-sistem-psi.vercel.app/)
 - Plataforma prevista: Vercel.
 - El archivo `vercel.json` reescribe todo a `index.html` excepto `/api/*`,
   para que las rutas profundas puedan abrirse directamente sin romper
