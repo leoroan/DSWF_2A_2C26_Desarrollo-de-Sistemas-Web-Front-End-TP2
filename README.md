@@ -85,15 +85,15 @@ La misma tabla se muestra en la sección `/ia` y se alimenta desde `src/data/ai-
 Es una propuesta coherente con el trabajo registrado en git: cada integrante debe validar
 la herramienta y el modelo exactos antes de la entrega.
 
-| Integrante | Aplicación | Modelo | Uso |
-| ---------- | ---------- | ------ | --- |
-| Leandro Maselli | Asistente IA integrado al IDE (Muse Spark) | Modelo del asistente (validar versión exacta) | Proxies `/api/countries` y `/api/city-photo` sin exponer claves, `/api` unificada país + clima, fix de Vercel y scripts de verificación. |
-| Javier Canteros | Asistente IA integrado al IDE (Muse Spark) | Modelo del asistente (validar versión exacta) | Estilos base, tarjetas de API y chequeos iniciales del proxy de países. |
-| Nidia Elías | Asistente IA integrado al IDE (Muse Spark) | Modelo del asistente (validar versión exacta) | Banner FondoCiudad, servicio de fotos y variable `city` en `team.js`. |
-| Damián Pelisare | Asistente IA integrado al IDE (Muse Spark) | Modelo del asistente (validar versión exacta) | Portada del equipo y revisión de perfiles. |
-| Maximiliano Quinteros | Asistente IA integrado al IDE (Muse Spark) | Modelo del asistente (validar versión exacta) | Perfil personal y prueba de navegación. |
+| Integrante            | Aplicación                                 | Modelo                                        | Uso                                                                                                                                      |
+| --------------------- | ------------------------------------------ | --------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| Leandro Maselli       | Asistente IA integrado al IDE (Muse Spark) | Modelo del asistente (validar versión exacta) | Proxies `/api/countries` y `/api/city-photo` sin exponer claves, `/api` unificada país + clima, fix de Vercel y scripts de verificación. |
+| Javier Canteros       | Asistente IA integrado al IDE (Muse Spark) | Modelo del asistente (validar versión exacta) | Estilos base, tarjetas de API y chequeos iniciales del proxy de países.                                                                  |
+| Nidia Elías           | Asistente IA integrado al IDE (Muse Spark) | Modelo del asistente (validar versión exacta) | Banner FondoCiudad, servicio de fotos y variable `city` en `team.js`.                                                                    |
+| Damián Pelisare       | Asistente IA integrado al IDE (Muse Spark) | Modelo del asistente (validar versión exacta) | Portada del equipo y revisión de perfiles.                                                                                               |
+| Maximiliano Quinteros | Asistente IA integrado al IDE (Muse Spark) | Modelo del asistente (validar versión exacta) | Perfil personal y prueba de navegación.                                                                                                  |
 
-**Aclaración de conceptos:** *aplicación* es la herramienta utilizada y *modelo* es el
+**Aclaración de conceptos:** _aplicación_ es la herramienta utilizada y _modelo_ es el
 modelo concreto empleado en esa herramienta.
 
 ## APIs utilizadas
@@ -155,6 +155,7 @@ Servicio: `src/services/fondo.js`. El navegador consulta
 `/api/city-photo?ciudad=...` sin credenciales; `api/city-photo.js` agrega
 la clave en el servidor. Sin `UNSPLASH_ACCESS_KEY` o si Unsplash falla,
 se usa `/foto-respaldo.svg` local.
+
 ## Deploy
 
 - URL de producción: `URL_PENDIENTE`
@@ -209,17 +210,3 @@ api/{countries.js,city-photo.js}  # proxies servidor (Vercel Functions)
 scripts/{smoke-check,check-apis,check-countries-proxy,check-country-fields,check-city-photo}.js
 public/foto-respaldo.svg
 ```
-
-## Capturas
-
-Pendiente de agregar.
-
-## Pendientes para el equipo
-
-- [ ] Cada integrante debe validar su fila de Uso de IA (`src/data/ai-usage.js`): herramienta y modelo exactos.
-- [ ] Definir URL de demo y completar el enlace en `src/data/team.js` (`demoUrl`) y en este README.
-- [ ] Publicar el repositorio y verificar acceso sin autenticación (criterio 1).
-- [ ] Invitar a todos los integrantes y verificar que aceptaron la invitación (criterio 3).
-- [ ] Aplicar la identidad visual definitiva (criterio 9, fuera del alcance de esta base).
-
-
