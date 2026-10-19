@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router'
 import PageHeader from '../../components/common/PageHeader'
 import MemberCard from '../../components/team/MemberCard'
 import { getMemberById } from '../../data/team'

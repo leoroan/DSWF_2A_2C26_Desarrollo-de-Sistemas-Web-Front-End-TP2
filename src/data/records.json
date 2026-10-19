@@ -36,7 +36,7 @@
     "name": "React Router",
     "category": "Librerías",
     "description": "Librería de enrutamiento para React que permite crear navegación entre páginas sin recargar el documento.",
-    "details": "En este proyecto se usa en modo declarativo con BrowserRouter, Routes, Route y Outlet. La sidebar se mantiene montada en un layout común y solo cambia el contenido del Outlet.",
+    "details": "Librería de enrutamiento para React. En este proyecto se usa el paquete react-router (v7) en modo declarativo con BrowserRouter, Routes, Route y Outlet. La sidebar se mantiene montada en un layout común y solo cambia el contenido del Outlet.",
     "link": "https://reactrouter.com"
   },
   {

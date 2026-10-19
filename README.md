@@ -1,6 +1,6 @@
 # Espacio de ideas - TP2 DSWF
 
-Aplicación web desarrollada en **React** con **Vite** y **React Router**. Presenta al
+Aplicación web desarrollada en **React** con **Vite** y **React Router** (`react-router` v7). Presenta al
 equipo y organiza su información en secciones navegables: portada, integrantes con perfiles
 individuales y foto de su ciudad, datos locales con búsqueda y filtro, consulta a APIs
 públicas (país + clima de su capital), árbol de componentes, bitácora por etapas y
@@ -59,7 +59,7 @@ La misma información está en `src/data/team.js` y se muestra en `/integrantes`
 
 ## Funcionalidades
 
-- **Navegación React Router** con layout común y sidebar compartida.
+- **Navegación React Router** (`react-router` v7) con layout común y sidebar compartida.
 - **Sidebar responsive**: en desktop siempre visible; en viewport pequeño se convierte en
   panel desplegable con botón de apertura/cierre. Marca la sección activa con `NavLink`.
 - **Portada del equipo** (`/`) con presentación y acceso a integrantes.
@@ -75,7 +75,7 @@ La misma información está en `src/data/team.js` y se muestra en `/integrantes`
   independientes y reintento. Open-Meteo no requiere clave; las de REST Countries
   y Unsplash viven solo en el servidor.
 - **Árbol de componentes** de la jerarquía real, interactivo y expandible.
-- **Bitácora por etapas** (`/bitacora`): 4 etapas con período, aporte por integrante
+- **Bitácora por etapas** (`/bitacora`): 5 etapas con período, aporte por integrante
   y línea de tiempo expandible, desde `src/data/changelog.json`.
 - **Declaración de uso de IA** (`/ia`) por integrante, distinguiendo aplicación y modelo.
 

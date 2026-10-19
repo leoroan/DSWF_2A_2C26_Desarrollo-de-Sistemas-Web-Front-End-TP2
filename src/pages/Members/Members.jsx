@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router'
 import PageHeader from '../../components/common/PageHeader'
 import MemberList from '../../components/team/MemberList'
 import { teamMembers } from '../../data/team'

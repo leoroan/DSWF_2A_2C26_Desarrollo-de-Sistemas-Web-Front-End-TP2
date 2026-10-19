@@ -22,13 +22,13 @@ export const componentTree = {
               children: [
                 {
                   name: 'NavLink (por cada sección)',
-                  file: 'react-router-dom',
+                  file: 'react-router',
                 },
               ],
             },
             {
               name: 'Outlet',
-              file: 'react-router-dom',
+              file: 'react-router',
               children: [
                 {
                   name: 'Home',

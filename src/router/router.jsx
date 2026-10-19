@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Route, Routes } from 'react-router'
 import AppLayout from '../components/layout/AppLayout'
 import Home from '../pages/Home/Home'
 import Members from '../pages/Members/Members'
@@ -13,10 +13,15 @@ import NotFound from '../pages/NotFound/NotFound'
 /**
  * Navegación de la aplicación.
  * AppLayout mantiene la Sidebar y renderiza la página en el Outlet.
+ *
+ * Se usa react-router v7 en modo declarativo: BrowserRouter, Routes y Route
+ * organizan las rutas y Outlet renderiza la página de la ruta activa.
+ * En v7 las actualizaciones de estado del router ya se envuelven en
+ * React.startTransition por defecto, por lo que no hace falta el prop `future`.
  */
 function Router() {
   return (
-    <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+    <BrowserRouter>
       <Routes>
         <Route path="/" element={<AppLayout />}>
           <Route index element={<Home />} />

@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router'
 import { team } from '../../data/team'
 import { navSections } from '../../data/navigation'
 import './Sidebar.css'

@@ -1,4 +1,4 @@
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router'
 import '../../components/common/Page.css'
 
 /** Página para rutas inexistentes. Evita que el usuario quede atrapado. */
