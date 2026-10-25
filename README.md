@@ -53,7 +53,7 @@ La misma información está en `src/data/team.js` y se muestra en `/integrantes`
 
 ### Nidia Elías
 
-- GitHub: `https://github.com/nidia-elias/portfolio/`
+- GitHub: `https://nidia-elias.github.io/portfolio/`
 - Ciudad: Mar de Ajo, La Costa, Argentina
 - Responsabilidad: Banner de ciudad por perfil (FondoCiudad) y variable `city` en `team.js`.
 
