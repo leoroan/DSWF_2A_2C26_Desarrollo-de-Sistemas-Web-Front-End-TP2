@@ -39,7 +39,8 @@ export const teamMembers = [
     ],
     responsibilities: [
       "Inicialización del proyecto: navegacion, records.json, team.js, router con todas las paginas,servicios Open-Meteo y REST Countries, y config de Vite y Vercel.",
-      "Integración de servicios externos: Conexión con las APIs de Open-Meteo (datos meteorológicos) y REST Countries (información de países)."
+      "Integración de servicios externos: Conexión con las APIs de Open-Meteo (datos meteorológicos) y REST Countries (información de países).",
+      "Consolidó los estilos con variables CSS, mejoró el layout responsive y ordenó las tarjetas de API."
     ],
   },
   {
