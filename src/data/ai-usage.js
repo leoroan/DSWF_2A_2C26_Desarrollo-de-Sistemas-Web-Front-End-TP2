@@ -26,8 +26,8 @@ export const aiUsage = [
   {
     id: "ia-nidia",
     member: "Nidia Elías",
-    application: "Aplicacion web de DeepSeek",
-    model: "deepseek-4.1-flash",
+    application: "Gemini",
+    model: "Gemini 3 Flash",
     task: "Banner FondoCiudad por integrante, servicio de fotos de ciudad y variable city en team.js.",
   },
   {
