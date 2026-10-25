@@ -105,7 +105,7 @@ export const teamMembers = [
     name: "Nidia Elías",
     role: "Estudiante de Desarrollo",
     city: "Mar de Ajo, La Costa, Argentina",
-    github: "https://github.com/nidia-elias/portfolio/",
+    github: "https://nidia-elias.github.io/portfolio/",
     description:
       "Estudiante de Desarrollo de Software y Profesora de Matemática, enfocada en aplicar la tecnología para resolver problemas reales.",
     technologies: [
