@@ -38,8 +38,8 @@ export const teamMembers = [
       "JWT / OAuth",
     ],
     responsibilities: [
-      "Inicialización del proyecto: navegacion, records.json, team.js, router con todas las paginas,<br>servicios Open-Meteo y REST Countries, y config de Vite y Vercel.",
-      "Integración de servicios externos: Conexión con las APIs de Open-Meteo (datos meteorológicos)<br>y REST Countries (información de países)."
+      "Inicialización del proyecto: navegacion, records.json, team.js, router con todas las paginas,servicios Open-Meteo y REST Countries, y config de Vite y Vercel.",
+      "Integración de servicios externos: Conexión con las APIs de Open-Meteo (datos meteorológicos) y REST Countries (información de países)."
     ],
   },
   {
@@ -62,9 +62,9 @@ export const teamMembers = [
       "PHP",
     ],
     responsibilities: [
-      "Definición de estilos base:<br>Creación de la base visual y los estilos generales de la aplicación.",
-      "Identidad visual:<br>Establecimiento y documentación de la identidad visual inicial en el archivo de diseño (Docs/diseno.md).",
-      "Ajustes técnicos:<br>Configuración y correcciones en el proxy de países para su correcto funcionamiento.",
+      "Definición de estilos base:Creación de la base visual y los estilos generales de la aplicación.",
+      "Identidad visual: Establecimiento y documentación de la identidad visual inicial en el archivo de diseño (Docs/diseno.md).",
+      "Ajustes técnicos: Configuración y correcciones en el proxy de países para su correcto funcionamiento.",
       "Base de estilos de tarjetas de API y chequeos iniciales del proxy de paises."
     ],
   },
@@ -85,7 +85,7 @@ export const teamMembers = [
     ],
     responsibilities: [
       "Aportación de su información personal dentro de los datos del equipo.",
-      "Desarrollo y actualización de la bitácora de trabajo grupal (changelog.json),<br>asegurando la coherencia con el desarrollo de las etapas anteriores."
+      "Desarrollo y actualización de la bitácora de trabajo grupal (changelog.json), asegurando la coherencia con el desarrollo de las etapas anteriores."
     ],
   },
   {
@@ -123,8 +123,8 @@ export const teamMembers = [
       "MySQL",
     ],
     responsibilities: [
-      "Componentes y servicios: Desarrollo del servicio de fotos para la función,<br>creación del fondo de ciudad en los perfiles y creación del componente FondoCiudad.",
-      "Configuración de datos: Adición y gestión de la variable city<br>dentro del archivo de configuración del equipo (team.js)."
+      "Componentes y servicios: Desarrollo del servicio de fotos para la función, creación del fondo de ciudad en los perfiles y creación del componente FondoCiudad.",
+      "Configuración de datos: Adición y gestión de la variable city dentro del archivo de configuración del equipo (team.js)."
     ],
   },
 ];
